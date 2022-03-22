@@ -1,0 +1,43 @@
+.single-element {
+  max-width: 282px;
+  max-height: 361px;
+
+  border-radius: 10px;
+}
+.single-element__image {
+  width: 282px;
+  max-height: 282px;
+}
+.single-element__caption {
+  margin: 25px 0 31px 21px;
+  max-width: 220px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.single-element__like-button {
+  height: 19px;
+  width: 21px;
+  margin-right: 18px;
+  margin-top: 30px;
+  padding: 0;
+  border: none;
+  background-image: url(../images/likeButton.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.single-element__social-brand {
+  display: flex;
+  background: #ffffff;
+  border-radius: 0 0 10px 10px;
+  max-height: 79px;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 282px;
+}
