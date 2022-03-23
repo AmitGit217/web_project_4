@@ -45,6 +45,15 @@
   width: 282px;
   height: 79px;
 }
+@media screen and (min-width: 751px) and (max-width: 900px) {
+  .single-element {
+    width: 100%;
+  }
+  .single-element__social-brand {
+    width: 100%;
+  }
+}
+
 @media screen and (min-width: 501px) and (max-width: 750px) {
   .single-element {
     width: 100%;

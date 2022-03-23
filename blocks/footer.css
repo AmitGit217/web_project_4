@@ -11,7 +11,15 @@
   color: #545454;
   margin: 0;
 }
-
+@media screen and (max-width: 900px) {
+  .footer {
+    margin: 50px auto 36px auto;
+    width: 725px;
+  }
+  .footer__copyright {
+    font-size: 20px;
+  }
+}
 @media screen and (max-width: 750px) {
   .footer {
     margin: 50px auto 36px auto;

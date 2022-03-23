@@ -7,6 +7,11 @@
   row-gap: 21px;
 }
 
+@media screen and (min-width: 751px) and (max-width: 900px) {
+  .elements {
+    grid-template-columns: repeat(2, auto);
+  }
+}
 @media screen and (min-width: 501px) and (max-width: 750px) {
   .elements {
     display: flex;
