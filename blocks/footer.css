@@ -1,7 +1,6 @@
 .footer {
   align-self: flex-start;
   margin: 65px 0 60px 0;
-  display: none;
 }
 
 .footer__copyright {
@@ -13,6 +12,17 @@
   color: #545454;
   margin: 0;
 }
+
+@media screen and (min-width: 426px) and (max-width: 500px) {
+  .footer {
+    margin: 50px auto 36px 2%;
+    width: 282px;
+  }
+  .footer__copyright {
+    font-size: 20px;
+  }
+}
+
 @media screen and (min-width: 320px) and (max-width: 425px) {
   .footer {
     margin: 50px auto 36px auto;
