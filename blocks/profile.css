@@ -73,6 +73,40 @@
 .profile__add-button:hover {
   opacity: 0.6;
 }
+@media screen and (min-width: 426px) and (max-width: 767px) {
+  .profile {
+    display: grid;
+    height: 300px;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, 120px);
+    grid-template-areas:
+      "img info"
+      ". button";
+  }
+  .profile__info {
+    height: unset;
+    max-width: 290px;
+  }
+  .profile__avatar-image {
+    margin: 0 auto;
+  }
+  .profile__name {
+    font-size: 25px;
+    margin: 0;
+  }
+  .profile__edit-button {
+    margin: 5px auto 0 auto;
+  }
+  .profile__description {
+    margin: 10px 0 0 0;
+  }
+  .profile__add-button {
+    grid-area: button;
+    margin: 0 auto 0 0;
+    width: 273px;
+  }
+}
+
 @media screen and (min-width: 320px) and (max-width: 425px) {
   .profile {
     height: 286px;
