@@ -8,7 +8,7 @@
   max-height: 282px;
 }
 .single-element__caption {
-  margin: 25px 0 31px 21px;
+  margin: 25px 0 0 21px;
   max-width: 220px;
   font-family: "Inter";
   font-style: normal;
@@ -43,11 +43,11 @@
   justify-content: space-between;
   width: 100vw;
   width: 282px;
+  height: 79px;
 }
-
-@media screen and (min-width: 426px) and (max-width: 500px) {
+@media screen and (min-width: 501px) and (max-width: 750px) {
   .single-element {
-    width: 95%;
+    width: 100%;
   }
   .single-element__social-brand {
     width: 100%;
