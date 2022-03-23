@@ -13,6 +13,7 @@
   color: #545454;
   margin: 0;
 }
+<<<<<<< HEAD
 
 @media screen and (min-width: 426px) and (max-width: 500px) {
   .footer {
@@ -33,3 +34,5 @@
     font-size: 14px;
   }
 }
+=======
+>>>>>>> parent of f1c6050 (style: Responsive footer[320-425])

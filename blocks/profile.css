@@ -91,8 +91,8 @@
   }
   .profile__avatar-image {
     margin: 0 auto;
-    width: 135px;
-    height: 135px;
+    width: 160px;
+    height: 160px;
   }
   .profile__name {
     font-size: 35px;
@@ -109,7 +109,7 @@
   .profile__add-button {
     grid-area: button;
     margin: 0 auto 0 auto;
-    width: 95%;
+    width: calc(330px + 20px + 1px + 6px + 21px);
     padding: 0;
   }
 }
