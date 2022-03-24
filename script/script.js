@@ -1,14 +1,13 @@
 //Get our elements needed :)
-let likeButton = document.querySelectorAll(".single-element__like-button");
-let editButton = document.querySelector(".profile__edit-button");
-let closeButton = document.querySelector(".popup__close-button");
-let popup = document.querySelector(".popup");
-let popupFullName = document.querySelector(".popup__name");
-let popupDescription = document.querySelector(".popup__description");
-let saveButton = document.querySelector(".popup__submit-button");
-let profileName = document.querySelector(".profile__name");
-let profileDescription = document.querySelector(".profile__description");
-
+const likeButton = document.querySelectorAll(".single-element__like-button");
+const editButton = document.querySelector(".profile__edit-button");
+const closeButton = document.querySelector(".popup__close-button");
+const popup = document.querySelector(".popup");
+const popupFullName = document.querySelector(".popup__name");
+const popupDescription = document.querySelector(".popup__description");
+const saveButton = document.querySelector(".popup__submit-button");
+const profileName = document.querySelector(".profile__name");
+const profileDescription = document.querySelector(".profile__description");
 //Open edit form & close it.
 function popupWindow() {
   popup.classList.toggle("popup_show");
@@ -16,11 +15,15 @@ function popupWindow() {
 editButton.addEventListener("click", popupWindow);
 closeButton.addEventListener("click", popupWindow);
 saveButton.addEventListener("click", popupWindow);
-
 //Change profile name and description using our save button
 function changeProfileData(event) {
   event.preventDefault();
-  profileName.innerHTML = popupFullName.value;
-  profileDescription.innerHTML = popupDescription.value;
+  if ((popupFullName.value && popupDescription.value) != "") {
+    profileName.textContent = popupFullName.value;
+    profileDescription.textContent = popupDescription.value;
+  } else {
+    popupFullName.value = profileName.textContent;
+    popupDescription.value = profileDescription.textContent;
+  }
 }
 saveButton.addEventListener("click", changeProfileData);

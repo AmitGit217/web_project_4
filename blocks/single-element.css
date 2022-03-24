@@ -35,6 +35,10 @@
 .single-element__like-button:hover {
   opacity: 0.5;
 }
+.single-element__like-button_active {
+  background-image: url(../images/likeButton_active.svg);
+  /*Wating for the OOP :)*/
+}
 .single-element__social-brand {
   display: flex;
   background: #ffffff;
