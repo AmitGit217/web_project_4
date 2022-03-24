@@ -2,6 +2,7 @@
   width: 282px;
   max-height: 361px;
   border-radius: 10px;
+  background-color: #ffffff;
 }
 .single-element__image {
   width: 100%;
@@ -20,6 +21,7 @@
   text-overflow: ellipsis;
 }
 .single-element__like-button {
+  background: none;
   height: 19px;
   width: 21px;
   margin-right: 18px;
@@ -27,7 +29,7 @@
   padding: 0;
   border: none;
   background-image: url(../images/likeButton.svg);
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
   transition: 0.2s;

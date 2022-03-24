@@ -2,15 +2,16 @@
 
 ### Overview
 
-* Figma
-* Images
+Responsive web application for all modern screens.
+for now as you can see there is some images and a profile name and description, for this step you can change the profile values using my simple popup form.
+as the course will progresse I will add some sunctions to my like buttons and adding images by other users, keep in touch !
+**Technologies**
 
-**Figma**
+- Semantic HTML5
+- CSS3 {flexbox, grid layout}
+- Flat BEM methodology
+- Javascript
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+I was really focused on working on the responsive design at all screen, no absolute positioning is used if there was no need for it.
 
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+- [Show me the project](https://amitgit217.github.io/web_project_4/)

@@ -20,7 +20,7 @@ saveButton.addEventListener("click", popupWindow);
 //Change profile name and description using our save button
 function changeProfileData(event) {
   event.preventDefault();
-  if ((popupFullName.value && popupDescription.value) != "") {
+  if ((popupFullName.value || popupDescription.value) != "") {
     profileName.textContent = popupFullName.value;
     profileDescription.textContent = popupDescription.value;
   } else {
