@@ -8,6 +8,7 @@ const popupDescription = document.querySelector(".popup__description");
 const saveButton = document.querySelector(".popup__submit-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+
 //Open edit form & close it.
 function popupWindow() {
   popup.classList.toggle("popup_show");
@@ -15,6 +16,7 @@ function popupWindow() {
 editButton.addEventListener("click", popupWindow);
 closeButton.addEventListener("click", popupWindow);
 saveButton.addEventListener("click", popupWindow);
+
 //Change profile name and description using our save button
 function changeProfileData(event) {
   event.preventDefault();
