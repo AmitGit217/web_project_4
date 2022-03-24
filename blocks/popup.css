@@ -106,3 +106,48 @@
 .popup_hidden-class {
   visibility: hidden;
 }
+
+@media screen and (max-width: 600px) {
+  .popup {
+    width: 100%;
+  }
+  .popup__wrapper {
+    width: 282px;
+    margin-top: 100px;
+  }
+  .popup__close-button {
+    height: 20px;
+    width: 20px;
+    margin-right: 9px;
+    margin-bottom: 19px;
+  }
+  .popup__form {
+    width: 282px;
+    height: 322px;
+  }
+  .popup__title {
+    margin: 25px 22px 75px 22px;
+    font-size: 18px;
+    width: 238px;
+    max-height: 22px;
+  }
+  .popup__input {
+    width: 238px;
+    margin: 0 22px;
+  }
+  .popup__line {
+    width: 238px;
+    margin-top: 13px;
+  }
+
+  .popup__input:nth-child(4) {
+    margin-top: 30px;
+  }
+  .popup__submit-button {
+    width: 238px;
+    height: 46px;
+    margin-top: 46px;
+    margin-bottom: 25px;
+    font-size: 14px;
+  }
+}
