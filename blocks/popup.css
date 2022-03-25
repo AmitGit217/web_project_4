@@ -39,7 +39,7 @@
   cursor: pointer;
   border: none;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url(../images/Close\ Icon.png);
+  background-image: url(../images/Close\ Icon.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -64,17 +64,18 @@
   position: relative;
   border: none;
   width: 358px;
-  margin: 0 36px;
+  margin: 0 0 29.74px 36px;
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   /* line-height: 17px; */
   color: #000000;
-  padding: 0;
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.popup__input:nth-child(4) {
-  margin-top: 29.74px;
+.popup__input:nth-last-child(2) {
+  margin-bottom: 0;
 }
 .popup__line {
   border: none;
@@ -138,16 +139,17 @@
   }
   .popup__input {
     width: 238px;
-    margin: 0 22px;
+    margin: 0 0 30px 22px;
     max-height: 14px;
+    padding-bottom: 9px;
   }
   .popup__line {
     width: 238px;
     margin-top: 13px;
   }
 
-  .popup__input:nth-child(4) {
-    margin-top: 30px;
+  .popup__input:nth-last-child(2) {
+    margin-bottom: 0;
   }
   .popup__submit-button {
     width: 238px;

@@ -9,8 +9,3 @@
   max-width: 880px;
   box-sizing: border-box;
 }
-@media screen and (min-width: 751px) and (max-width: 900px) {
-  .main {
-    max-width: 751px;
-  }
-}
