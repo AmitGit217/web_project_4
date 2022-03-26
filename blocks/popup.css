@@ -13,7 +13,7 @@
   transition: all 0.3s linear;
 }
 .popup__wrapper {
-  /*This div make this closing button responsive*/
+  /*This div make the closing button responsive*/
   margin-top: 180px;
   width: 500px;
   display: flex;
