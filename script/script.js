@@ -4,8 +4,12 @@ const likeButton = document.querySelectorAll(".single-element__like-button");
 const editButton = document.querySelector(".profile__edit-button");
 const closeButton = document.querySelector(".popup__close-button");
 const popup = document.querySelector(".popup");
-const popupFullName = document.querySelector(".popup__input_name");
-const popupDescription = document.querySelector(".popup__input_description");
+const popupFullName = document.querySelector(
+  ".popup__input_changeProfileData_name"
+);
+const popupDescription = document.querySelector(
+  ".popup__input_changeProfileData_description"
+);
 const saveButton = document.querySelector(".popup__submit-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
