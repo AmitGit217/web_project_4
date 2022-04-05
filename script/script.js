@@ -63,23 +63,18 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-///////////////////////////////////////////////////////////////////
 // cards template//
 const elementsSection = document.querySelector(".elements");
 function createCard(initialCards) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__image").src = initialCards.link;
+  cardElement.querySelector(".card__image").alt = initialCards.name;
   cardElement.querySelector(".card__caption").textContent = initialCards.name;
   return cardElement;
 }
-const card = createCard(initialCards);
-initialCards.forEach((card) => {
-  elementsSection.append(createCard(card));
-  //I used in this case append for keeping the desing as the old one, while I will add the "add image" I will use prepend//
-});
-
 // Add card //
+
 const addButton = document.querySelector(".profile__add-button");
 const popupAddCard = document.querySelector(".popup_AddCard");
 const popupAddCard_closeButton = document.querySelector(
@@ -88,17 +83,42 @@ const popupAddCard_closeButton = document.querySelector(
 const popupAddCard_submitButton = document.querySelector(
   ".popupAddCard_submitButton "
 );
-function popupWindow_add() {
-  popupAddCard.classList.add("popup_show");
-}
+const popup_AddCardForm = document.querySelector(".popup_AddCardForm");
+
 function popupWindow_addRemove() {
   popupAddCard.classList.remove("popup_show");
 }
-function popupWindow_addSubmit(evt) {
+addButton.addEventListener("click", () => {
+  popupAddCard.classList.add("popup_show");
+});
+popup_AddCardForm.addEventListener("submit", (evt) => {
+  const popup_AddCardCaption = document.querySelector(
+    ".popup_AddCard__input_changeProfileData_caption"
+  );
+  const popup_AddCardImageURL = document.querySelector(
+    ".popup_AddCard__input_changeProfileData_imageURL"
+  );
   evt.preventDefault();
-}
+  initialCards.push({
+    name: popup_AddCardCaption.value,
+    link: popup_AddCardImageURL.value,
+    //I used this push method to change my array as well//
+  });
+  elementsSection.prepend(
+    createCard({
+      name: popup_AddCardCaption.value,
+      link: popup_AddCardImageURL.value,
+    })
+  );
+  //Reset to empty value !//
+  popup_AddCardCaption.value = "";
+  popup_AddCardImageURL.value = "";
+});
 
-addButton.addEventListener("click", popupWindow_add);
 popupAddCard_closeButton.addEventListener("click", popupWindow_addRemove);
 popupAddCard_submitButton.addEventListener("click", popupWindow_addRemove);
-popupAddCard_submitButton.addEventListener("click", popupWindow_addSubmit);
+
+const card = createCard(initialCards);
+initialCards.forEach((card) => {
+  elementsSection.append(createCard(card));
+});
