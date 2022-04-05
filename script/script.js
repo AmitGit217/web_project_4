@@ -3,7 +3,7 @@ const popupForm = document.querySelector(".popup__form");
 const likeButton = document.querySelectorAll(".card__like-button");
 const editButton = document.querySelector(".profile__edit-button");
 const closeButton = document.querySelector(".popup__close-button");
-const popup = document.querySelector(".popup");
+const popup = document.querySelector("#popup");
 const popupFullName = document.querySelector(
   ".popup__input_changeProfileData_name"
 );
@@ -16,11 +16,14 @@ const profileDescription = document.querySelector(".profile__description");
 ////////////////////////////////////////////////////////////////////////////////
 //Open edit form & close it.//////////////////////
 function popupWindow() {
-  popup.classList.toggle("popup_show");
+  popup.classList.add("popup_show");
+}
+function popupWindow_remove() {
+  popup.classList.remove("popup_show");
 }
 editButton.addEventListener("click", popupWindow);
-closeButton.addEventListener("click", popupWindow);
-saveButton.addEventListener("click", popupWindow);
+closeButton.addEventListener("click", popupWindow_remove);
+saveButton.addEventListener("click", popupWindow_remove);
 //////////////////////////////////////////////////
 // Change profile name and description using our save button /
 function changeProfileData(event) {
@@ -75,3 +78,27 @@ initialCards.forEach((card) => {
   elementsSection.append(createCard(card));
   //I used in this case append for keeping the desing as the old one, while I will add the "add image" I will use prepend//
 });
+
+// Add card //
+const addButton = document.querySelector(".profile__add-button");
+const popupAddCard = document.querySelector(".popup_AddCard");
+const popupAddCard_closeButton = document.querySelector(
+  ".popup__close-button_AddCard"
+);
+const popupAddCard_submitButton = document.querySelector(
+  ".popupAddCard_submitButton "
+);
+function popupWindow_add() {
+  popupAddCard.classList.add("popup_show");
+}
+function popupWindow_addRemove() {
+  popupAddCard.classList.remove("popup_show");
+}
+function popupWindow_addSubmit(evt) {
+  evt.preventDefault();
+}
+
+addButton.addEventListener("click", popupWindow_add);
+popupAddCard_closeButton.addEventListener("click", popupWindow_addRemove);
+popupAddCard_submitButton.addEventListener("click", popupWindow_addRemove);
+popupAddCard_submitButton.addEventListener("click", popupWindow_addSubmit);

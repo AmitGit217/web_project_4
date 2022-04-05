@@ -9,7 +9,7 @@
     <title>Around the U.S</title>
   </head>
   <body class="page">
-    <div class="popup">
+    <div class="popup" id="popup">
       <div class="popup__wrapper">
         <button class="popup__close-button" type="button"></button>
         <form class="popup__form" name="register">
@@ -29,6 +29,35 @@
             value="Explorer"
           />
           <button class="popup__submit-button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_AddCard">
+      <div class="popup__wrapper">
+        <button
+          class="popup__close-button popup__close-button_AddCard"
+          type="button"
+        ></button>
+        <form class="popup__form" name="register">
+          <h2 class="popup__title">New place</h2>
+          <input
+            class="popup__input popup__input_changeProfileData_name"
+            type="text"
+            name="fullName"
+            placeholder="Title"
+          />
+          <input
+            class="popup__input popup__input_changeProfileData_description"
+            type="text"
+            name="description"
+            placeholder="Image Link"
+          />
+          <button
+            class="popup__submit-button popupAddCard_submitButton"
+            type="submit"
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>
