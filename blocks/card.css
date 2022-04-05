@@ -1,14 +1,15 @@
-.single-element {
-  max-width: 282px;
+.card {
+  width: 282px;
   max-height: 361px;
   border-radius: 10px;
   background-color: #ffffff;
 }
-.single-element__image {
+.card__image {
   width: 100%;
-  max-height: 282px;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
 }
-.single-element__caption {
+.card__caption {
   margin: 25px 0 0 21px;
   max-width: 220px;
   font-family: "Inter";
@@ -20,7 +21,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.single-element__like-button {
+.card__like-button {
   background: none;
   height: 19px;
   width: 21px;
@@ -34,14 +35,14 @@
   cursor: pointer;
   transition: 0.2s;
 }
-.single-element__like-button:hover {
+.card__like-button:hover {
   opacity: 0.5;
 }
-.single-element__like-button_active {
+.card__like-button_active {
   background-image: url(../images/likeButton_active.svg);
   /*Wating for the OOP :)*/
 }
-.single-element__social-brand {
+.card__social-brand {
   display: flex;
   background: #ffffff;
   border-radius: 0 0 10px 10px;
