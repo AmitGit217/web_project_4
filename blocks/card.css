@@ -3,6 +3,7 @@
   max-height: 361px;
   border-radius: 10px;
   background-color: #ffffff;
+  position: relative;
 }
 .card__image {
   width: 100%;
@@ -42,6 +43,10 @@
   background-image: url(../images/likeButton_active.svg);
   /*Wating for the OOP :)*/
 }
+.card__like-button_active:hover {
+  /* There is no need fro hover state for the active part, also that looks better*/
+  opacity: 1;
+}
 .card__social-brand {
   display: flex;
   background: #ffffff;
@@ -50,4 +55,19 @@
   justify-content: space-between;
   width: 100%;
   padding-bottom: 9%;
+}
+.card__removeButton {
+  position: absolute;
+  top: 23px;
+  right: 16px;
+  width: 18px;
+  height: 19px;
+  background: none;
+  background-image: url(../images/deleteButton.svg);
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.card__removeButton:hover {
+  opacity: 0.6;
 }

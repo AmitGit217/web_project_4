@@ -71,32 +71,48 @@ function createCard(initialCards) {
   cardElement.querySelector(".card__image").src = initialCards.link;
   cardElement.querySelector(".card__image").alt = initialCards.name;
   cardElement.querySelector(".card__caption").textContent = initialCards.name;
+  //Like button//
+  cardElement
+    .querySelector(".card__like-button")
+    .addEventListener("click", (evt) => {
+      evt.target.classList.toggle("card__like-button_active");
+    });
+  //Remove specific element//
+  cardElement
+    .querySelector(".card__removeButton")
+    .addEventListener("click", () => {
+      const thisCard = cardElement.closest(".card");
+      thisCard.remove();
+    });
+
   return cardElement;
 }
-// Add card //
 
+// Add card //
 const addButton = document.querySelector(".profile__add-button");
-const popupAddCard = document.querySelector(".popup_AddCard");
+const popupAddCard = document.querySelector(".popupAddCard");
 const popupAddCard_closeButton = document.querySelector(
-  ".popup__close-button_AddCard"
+  ".popupAddCard__closeButton"
 );
 const popupAddCard_submitButton = document.querySelector(
   ".popupAddCard_submitButton "
 );
-const popup_AddCardForm = document.querySelector(".popup_AddCardForm");
+const popup_AddCardForm = document.querySelector(".popupAddCard__Form");
 
 function popupWindow_addRemove() {
   popupAddCard.classList.remove("popup_show");
 }
+
 addButton.addEventListener("click", () => {
   popupAddCard.classList.add("popup_show");
 });
+
 popup_AddCardForm.addEventListener("submit", (evt) => {
   const popup_AddCardCaption = document.querySelector(
-    ".popup_AddCard__input_changeProfileData_caption"
+    ".popupAddCard__input_addPhoto_caption"
   );
   const popup_AddCardImageURL = document.querySelector(
-    ".popup_AddCard__input_changeProfileData_imageURL"
+    ".popupAddCard__input_addPhoto_ImageURL"
   );
   evt.preventDefault();
   initialCards.push({
@@ -122,3 +138,5 @@ const card = createCard(initialCards);
 initialCards.forEach((card) => {
   elementsSection.append(createCard(card));
 });
+
+//Delete card//
