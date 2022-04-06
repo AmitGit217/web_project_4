@@ -77,20 +77,20 @@ function createCard(initialCards) {
   cardElement.querySelector(".card__image").src = initialCards.link;
   cardElement.querySelector(".card__image").alt = initialCards.name;
   cardElement.querySelector(".card__caption").textContent = initialCards.name;
-  //Like button//
+  //Like button of this element//
   cardElement
     .querySelector(".card__like-button")
     .addEventListener("click", (evt) => {
       evt.target.classList.toggle("card__like-button_active");
     });
-  //Remove specific element//
+  //Remove this element//
   cardElement
     .querySelector(".card__removeButton")
     .addEventListener("click", () => {
       const thisCard = cardElement.closest(".card");
       thisCard.remove();
     });
-  //Show popupImage//
+  //Show popupImage of this element//
   cardElement.querySelector(".card__image").addEventListener("click", () => {
     imagePopup__image.src = initialCards.link;
     imagePopup__caption.textContent = initialCards.name;
@@ -148,6 +148,7 @@ popup_AddCardForm.addEventListener("submit", (evt) => {
 popupAddCard_closeButton.addEventListener("click", hideImagePopup);
 popupAddCard_submitButton.addEventListener("click", hideImagePopup);
 
+//Create our layout//
 const card = createCard(initialCards);
 initialCards.forEach((card) => {
   elementsSection.append(createCard(card));

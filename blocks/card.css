@@ -54,12 +54,15 @@
 }
 .card__removeButton {
   position: absolute;
-  top: 23px;
-  right: 16px;
+  top: 18px;
+  right: 15px;
   width: 18px;
-  height: 19px;
+  height: 19.3px;
   background: none;
   background-image: url(../images/deleteButton.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   border: none;
   cursor: pointer;
   transition: 0.3s;
