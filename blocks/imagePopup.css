@@ -7,7 +7,6 @@
   height: 100vh;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-  align-items: center;
   transition: all 0.3s linear;
   visibility: hidden;
   opacity: 0;
@@ -17,7 +16,6 @@
 .imagePopup__wrapper {
   /*This div make the closing button responsive*/
   display: flex;
-
   flex-direction: column;
   align-items: center;
   position: relative;
