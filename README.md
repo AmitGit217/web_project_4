@@ -3,8 +3,13 @@
 ### Overview
 
 Responsive web application for all modern screens.
-for now as you can see there is some images and a profile name and description, for this step you can change the profile values using my simple popup form.
-as the course will progresse I will add some sunctions to my like buttons and adding images by other users, keep in touch !
+**Features**
+
+- Update profile data
+- Add and remove an image
+- Like an image
+- Zoom on an image
+
 **Technologies**
 
 - Semantic HTML5
