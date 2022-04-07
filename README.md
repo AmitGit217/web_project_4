@@ -17,6 +17,4 @@ Responsive web application for all modern screens.
 - Flat BEM methodology
 - Javascript
 
-I was really focused on working on the responsive design at all screen, no absolute positioning is used if there was no need for it.
-
 - [Show me the project](https://amitgit217.github.io/web_project_4/)
