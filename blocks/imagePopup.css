@@ -52,10 +52,10 @@
   color: #ffffff;
   align-self: flex-start;
 }
-.imagePopup_show {
+/* .imagePopup_show {
   visibility: visible;
   opacity: 1;
-}
+} */
 @media screen and (max-width: 425px) {
   .imagePopup__closeButton {
     min-height: 30px;

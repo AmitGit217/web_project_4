@@ -9,10 +9,14 @@
     <title>Around the U.S</title>
   </head>
   <body class="page">
-    <div class="popup">
+    <div class="popup" id="profilePopup">
       <div class="popup__wrapper">
-        <button class="popup__close-button" type="button"></button>
-        <form class="popup__form" name="register">
+        <button
+          class="popup__close-button"
+          id="profilePopup__close-button"
+          type="button"
+        ></button>
+        <form class="popup__form" name="register" id="profilePopup__form">
           <h2 class="popup__title">Edit profile</h2>
           <input
             class="popup__input popup__input_changeProfileData_name"
@@ -34,10 +38,14 @@
         </form>
       </div>
     </div>
-    <div class="popup">
+    <div class="popup" id="addImagePopup">
       <div class="popup__wrapper">
-        <button class="popup__close-button" type="button"></button>
-        <form class="popup__form popup__form_addCard" name="register">
+        <button
+          class="popup__close-button"
+          type="button"
+          id="add-popup__close-button"
+        ></button>
+        <form class="popup__form" id="addImagePopup__form" name="register">
           <h2 class="popup__title">New place</h2>
           <input
             class="popup__input popup__input_addPhoto_caption"
@@ -78,7 +86,11 @@
         <div class="profile__info">
           <div class="profile__top-info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="profile__edit-button" type="button"></button>
+            <button
+              class="profile__edit-button"
+              type="button"
+              id="profilePopup__edit-button"
+            ></button>
           </div>
           <p class="profile__description">Explorer</p>
         </div>
