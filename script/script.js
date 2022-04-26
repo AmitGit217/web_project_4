@@ -35,6 +35,21 @@ profilePopupCloseButton.addEventListener("click", () => {
   closePopup(editProfilePopup);
 });
 
+editProfilePopup.addEventListener("click", (e) => {
+  if (e.target !== e.currentTarget) {
+    return;
+  } else {
+    closePopup(editProfilePopup);
+  }
+});
+addCardPopup.addEventListener("click", (e) => {
+  if (e.target !== e.currentTarget) {
+    return;
+  } else {
+    closePopup(addCardPopup);
+  }
+});
+
 // Change profile name and description using our save button /
 function changeProfileData(event) {
   event.preventDefault();
