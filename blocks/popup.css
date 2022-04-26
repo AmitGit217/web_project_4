@@ -128,8 +128,12 @@
   visibility: hidden;
   opacity: 0;
 }
-.popup__input:invalid {
-  border-bottom: 1px solid red;
+.popup__input-error_active {
+  visibility: visible;
+  opacity: 1;
+}
+.popup__input_type_error {
+  border-bottom-color: red;
 }
 
 @media screen and (max-width: 600px) {

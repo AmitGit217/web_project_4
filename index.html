@@ -32,11 +32,10 @@
               value="Jacques Cousteau"
               minlength="2"
               maxlength="40"
+              id="name-input"
               required
             />
-            <span class="popup__input-error name-input-error"
-              >Place Holder</span
-            >
+            <span class="name-input-error popup__input-error"></span>
           </label>
           <label class="popup__field">
             <input
@@ -48,10 +47,9 @@
               minlength="2"
               maxlength="200"
               required
+              id="caption-input"
             />
-            <span class="popup__input-error name-input-error"
-              >Place Holder</span
-            >
+            <span class="popup__input-error caption-input-error"></span>
           </label>
           <button class="popup__submit-button" type="submit">Save</button>
         </form>
@@ -76,12 +74,13 @@
               class="popup__input popup__input_addPhoto_caption"
               type="text"
               name="caption"
+              id="caption"
               placeholder="Title"
+              minlength="2"
+              maxlength="400"
               required
             />
-            <span class="popup__input-error name-input-error"
-              >Place Holder</span
-            >
+            <span class="popup__input-error caption-input-error"></span>
           </label>
           <label class="popup__field">
             <input
