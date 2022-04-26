@@ -74,10 +74,10 @@
               class="popup__input popup__input_addPhoto_caption"
               type="text"
               name="caption"
-              id="caption"
+              id="caption-input"
               placeholder="Title"
-              minlength="2"
-              maxlength="400"
+              minlength="1"
+              maxlength="30"
               required
             />
             <span class="popup__input-error caption-input-error"></span>
@@ -88,13 +88,14 @@
               type="url"
               name="image"
               placeholder="Image Link"
+              id="url-input"
               required
             />
-            <span class="popup__input-error name-input-error"
-              >Place Holder</span
-            >
+            <span class="popup__input-error url-input-error"></span>
           </label>
-          <button class="popup__submit-button" type="submit">Create</button>
+          <button class="popup__submit-button" type="submit" disabled>
+            Create
+          </button>
         </form>
       </div>
     </div>

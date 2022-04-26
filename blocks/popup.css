@@ -12,6 +12,7 @@
   opacity: 0;
   transition: all 0.3s linear;
 }
+
 .popup__wrapper {
   /*This div make the closing button responsive*/
   margin-top: 180px;
@@ -106,6 +107,9 @@
 }
 .popup__submit-button:hover {
   opacity: 0.8;
+}
+.popup__submit-button_inactive {
+  opacity: 0.2;
 }
 
 .popup_show {
