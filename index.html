@@ -16,24 +16,43 @@
           id="profilePopup__close-button"
           type="button"
         ></button>
-        <form class="popup__form" name="register" id="profilePopup__form">
+        <form
+          class="popup__form form"
+          name="register"
+          id="profilePopup__form"
+          novalidate
+        >
           <h2 class="popup__title">Edit profile</h2>
-          <input
-            class="popup__input popup__input_changeProfileData_name"
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value="Jacques Cousteau"
-            required
-          />
-          <input
-            class="popup__input popup__input_changeProfileData_description"
-            type="text"
-            name="description"
-            placeholder="Description"
-            value="Explorer"
-            required
-          />
+          <label class="popup__field">
+            <input
+              class="popup__input popup__input_changeProfileData_name"
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              value="Jacques Cousteau"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="popup__input-error name-input-error"
+              >Place Holder</span
+            >
+          </label>
+          <label class="popup__field">
+            <input
+              class="popup__input popup__input_changeProfileData_description"
+              type="text"
+              name="description"
+              placeholder="Description"
+              value="Explorer"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="popup__input-error name-input-error"
+              >Place Holder</span
+            >
+          </label>
           <button class="popup__submit-button" type="submit">Save</button>
         </form>
       </div>
@@ -45,22 +64,37 @@
           type="button"
           id="add-popup__close-button"
         ></button>
-        <form class="popup__form" id="addImagePopup__form" name="register">
+        <form
+          class="popup__form form"
+          id="addImagePopup__form"
+          name="register"
+          novalidate
+        >
           <h2 class="popup__title">New place</h2>
-          <input
-            class="popup__input popup__input_addPhoto_caption"
-            type="text"
-            name="caption"
-            placeholder="Title"
-            required
-          />
-          <input
-            class="popup__input popup__input_addPhoto_ImageURL"
-            type="text"
-            name="image"
-            placeholder="Image Link"
-            required
-          />
+          <label class="popup__field">
+            <input
+              class="popup__input popup__input_addPhoto_caption"
+              type="text"
+              name="caption"
+              placeholder="Title"
+              required
+            />
+            <span class="popup__input-error name-input-error"
+              >Place Holder</span
+            >
+          </label>
+          <label class="popup__field">
+            <input
+              class="popup__input popup__input_addPhoto_ImageURL"
+              type="url"
+              name="image"
+              placeholder="Image Link"
+              required
+            />
+            <span class="popup__input-error name-input-error"
+              >Place Holder</span
+            >
+          </label>
           <button class="popup__submit-button" type="submit">Create</button>
         </form>
       </div>
@@ -112,5 +146,6 @@
       </div>
     </template>
     <script src="./script/script.js"></script>
+    <script src="./script/validate.js"></script>
   </body>
 </html>
