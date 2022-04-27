@@ -78,4 +78,5 @@ const enableValidation = (settings) => {
     setEventListeners(formElement, settings);
   });
 };
+
 enableValidation(configObject);

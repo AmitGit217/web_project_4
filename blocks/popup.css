@@ -22,6 +22,7 @@
   align-items: center;
 }
 .popup__form {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 430px;
@@ -87,7 +88,8 @@
 }
 
 .popup__submit-button {
-  margin-top: calc(31.34px - 13px);
+  position: absolute;
+  bottom: 18px;
   align-self: center;
   width: 358px;
   height: 50.15px;
@@ -157,6 +159,7 @@
   .popup__form {
     width: 282px;
     height: 322px;
+    position: relative;
   }
   .popup__title {
     margin: 25px 22px 75px 22px;
@@ -179,11 +182,15 @@
     margin-bottom: 0;
   }
   .popup__submit-button {
+    position: absolute;
     width: 238px;
     height: 46px;
-    margin-top: 46px;
-    margin-bottom: 25px;
+    margin: 0;
     font-size: 14px;
     padding: 0;
+    bottom: 30px;
+  }
+  .popup__input-error {
+    margin: 5px 0 0 22px;
   }
 }
