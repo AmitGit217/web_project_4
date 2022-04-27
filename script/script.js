@@ -6,6 +6,7 @@ const imagePopup = document.querySelector(".imagePopup");
 ///Global functions for openning & colsing popups///
 function openPopup(popup) {
   popup.classList.add("popup_show");
+  window.addEventListener("keydown", closeFromEsc);
 }
 function closePopup(popup) {
   popup.classList.remove("popup_show");
@@ -18,7 +19,6 @@ const closeFromEsc = (e) => {
       closePopup(addCardPopup) ||
       closePopup(imagePopup);
     window.removeEventListener("keydown", closeFromEsc);
-    //After our window is closed, we can get rid of our EventListener
   }
 };
 /// ### Profile popup ### ///
@@ -40,7 +40,6 @@ const profileDescription = document.querySelector(".profile__description");
 //Open the edit profile popup//
 profileEditButton.addEventListener("click", () => {
   openPopup(editProfilePopup);
-  window.addEventListener("keydown", closeFromEsc);
   //When our popup is open we need our EventListener
 });
 profilePopupCloseButton.addEventListener("click", () => {
@@ -145,7 +144,6 @@ function createCard(card) {
     imagePopupPhoto.alt = card.name;
     imagePopupCaption.textContent = card.name;
     openPopup(imagePopup);
-    window.addEventListener("keydown", closeFromEsc);
   });
 
   //Close the image popup window. AKA => "UnZooming"//
@@ -166,7 +164,6 @@ function createCard(card) {
 //Openning and closing our add card popup//
 addButton.addEventListener("click", () => {
   openPopup(addImagePopup);
-  window.addEventListener("keydown", closeFromEsc);
   //When our popup is open we need our EventListener
 });
 addCardPopupCloseButton.addEventListener("click", () => {
