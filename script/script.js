@@ -9,8 +9,18 @@ function openPopup(popup) {
 }
 function closePopup(popup) {
   popup.classList.remove("popup_show");
+  window.removeEventListener("keydown", closeFromEsc);
 }
-
+//Close with Escape key
+const closeFromEsc = (e) => {
+  if (e.key === "Escape") {
+    closePopup(editProfilePopup) ||
+      closePopup(addCardPopup) ||
+      closePopup(imagePopup);
+    window.removeEventListener("keydown", closeFromEsc);
+    //After our window is closed, we can get rid of our EventListener
+  }
+};
 /// ### Profile popup ### ///
 
 // 1. Our elements from the DOM //
@@ -30,11 +40,14 @@ const profileDescription = document.querySelector(".profile__description");
 //Open the edit profile popup//
 profileEditButton.addEventListener("click", () => {
   openPopup(editProfilePopup);
+  window.addEventListener("keydown", closeFromEsc);
+  //When our popup is open we need our EventListener
 });
 profilePopupCloseButton.addEventListener("click", () => {
   closePopup(editProfilePopup);
 });
 
+// Close popup from the overlay
 editProfilePopup.addEventListener("click", (e) => {
   if (e.target !== e.currentTarget) {
     return;
@@ -50,7 +63,7 @@ addCardPopup.addEventListener("click", (e) => {
   }
 });
 
-// Change profile name and description using our save button /
+// Change profile name and description using our save button
 function changeProfileData(event) {
   event.preventDefault();
   profileName.textContent = profilePopupName.value;
@@ -132,11 +145,19 @@ function createCard(card) {
     imagePopupPhoto.alt = card.name;
     imagePopupCaption.textContent = card.name;
     openPopup(imagePopup);
+    window.addEventListener("keydown", closeFromEsc);
   });
 
   //Close the image popup window. AKA => "UnZooming"//
   imagePopupCloseButton.addEventListener("click", () => {
     closePopup(imagePopup);
+  });
+  imagePopup.addEventListener("click", (e) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    } else {
+      closePopup(imagePopup);
+    }
   });
 
   return cardElement; // On this state the card element contains all the functions needed //
@@ -145,6 +166,8 @@ function createCard(card) {
 //Openning and closing our add card popup//
 addButton.addEventListener("click", () => {
   openPopup(addImagePopup);
+  window.addEventListener("keydown", closeFromEsc);
+  //When our popup is open we need our EventListener
 });
 addCardPopupCloseButton.addEventListener("click", () => {
   closePopup(addImagePopup);
@@ -166,6 +189,7 @@ addCardPopupForm.addEventListener("submit", (evt) => {
     })
   );
   closePopup(addImagePopup);
+
   addCardPopupForm.reset();
 });
 
