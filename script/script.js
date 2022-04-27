@@ -1,9 +1,16 @@
-//Declaring our popups with variabels//
+//
+// ─── GET THE MAIN POPUPS ────────────────────────────────────────────────────────
+//
 const editProfilePopup = document.querySelector("#profilePopup");
 const addCardPopup = document.querySelector("#addImagePopup");
 const imagePopup = document.querySelector(".imagePopup");
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
-///Global functions for openning & colsing popups///
+//
+// ─── GLOBAL FUNCTIONS FOR OPENING AND CLOSING POPUPS ──────────────────────────────
+//
 function openPopup(popup) {
   popup.classList.add("popup_show");
   window.addEventListener("keydown", closeFromEsc);
@@ -12,7 +19,13 @@ function closePopup(popup) {
   popup.classList.remove("popup_show");
   window.removeEventListener("keydown", closeFromEsc);
 }
-//Close with Escape key
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+
+//
+// ─── CLOSE WITH ESCAPE KEY ──────────────────────────────────────────────────────
+//
 const closeFromEsc = (e) => {
   if (e.key === "Escape") {
     closePopup(editProfilePopup) ||
@@ -21,9 +34,19 @@ const closeFromEsc = (e) => {
     window.removeEventListener("keydown", closeFromEsc);
   }
 };
-/// ### Profile popup ### ///
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
-// 1. Our elements from the DOM //
+//
+// ────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: P R O F I L E   P O P U P : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────────
+//
+
+//
+// ───OUR ELEMENTS FROM THE DOM ───────────────────────────────────────────────
+//
 const profilePopupForm = document.querySelector("#profilePopup__form");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
 const profilePopupCloseButton = document.querySelector(
@@ -37,16 +60,22 @@ const profilePopupDescription = document.querySelector(
 );
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-//Open the edit profile popup//
+//
+// ───── OPEN THE EDIT PROFILE POPUP ───────────────────────────────────────
+//
 profileEditButton.addEventListener("click", () => {
   openPopup(editProfilePopup);
-  //When our popup is open we need our EventListener
 });
 profilePopupCloseButton.addEventListener("click", () => {
   closePopup(editProfilePopup);
 });
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
-// Close popup from the overlay
+//
+// ───── CLOSE POPUP FROM THE OVERLAY ───────────────────────────────────────
+//
 editProfilePopup.addEventListener("click", (e) => {
   if (e.target !== e.currentTarget) {
     return;
@@ -61,8 +90,13 @@ addCardPopup.addEventListener("click", (e) => {
     closePopup(addCardPopup);
   }
 });
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
-// Change profile name and description using our save button
+//
+// ──── CHANGE PROFILE NAME AND DESCRIPTION USING OUR SAVE BUTTON ─────────────────
+//
 function changeProfileData(event) {
   event.preventDefault();
   profileName.textContent = profilePopupName.value;
@@ -71,10 +105,15 @@ function changeProfileData(event) {
 }
 profilePopupForm.addEventListener("submit", changeProfileData);
 
-/// End of edit profile popup functions ///
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
-/// ### Add Image Popup & Zoom on an Image Popup ### ///
-
+//
+// ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── III ──────────
+//   :::::: A D D   I M A G E   P O P U P   A N D   Z O O M   O N   A N   I M A G E   P O P U P : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+//
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -101,7 +140,9 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-// Cards template & Zoom on variabels //
+//
+// ──── CARDS TEMPLATE AND ZOOM ON VARIABLES ─────
+//
 const elementsSection = document.querySelector(".elements");
 const imagePopupPhoto = document.querySelector(".imagePopup__image");
 const imagePopupCaption = document.querySelector(".imagePopup__caption");
@@ -114,39 +155,56 @@ const addCardPopupForm = document.querySelector("#addImagePopup__form");
 const addCardPopupCloseButton = document.querySelector(
   "#add-popup__close-button"
 );
-
-//  Create card and their functions //
+//
+// ─── CREATE CARD AND THEIR FUNCTIONS ─────
+//
 function createCard(card) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const imageElement = cardElement.querySelector(".card__image");
   imageElement.src = card.link;
   imageElement.alt = card.name;
   cardElement.querySelector(".card__caption").textContent = card.name;
-
-  //Like button of this element//
+  //
+  // ─── LIKE BUTTON OF THIS ELEMENT ─────
+  //
   cardElement
     .querySelector(".card__like-button")
     .addEventListener("click", (evt) => {
       evt.target.classList.toggle("card__like-button_active");
     });
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
 
-  //Remove this element//
+  //
+  // ─── REMOVE THIS ELEMENT ─────
+  //
   cardElement
     .querySelector(".card__removeButton")
     .addEventListener("click", () => {
       const thisCard = cardElement.closest(".card");
       thisCard.remove();
     });
+  // ─────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
 
-  //Show image popup of this element. AKA => "Zooming"//
+  //
+  // ───── SHOW IMAGE POPUP OF THIS ELEMENT KNOWN AS ZOOMING ─────
+  //
   cardElement.querySelector(".card__image").addEventListener("click", () => {
     imagePopupPhoto.src = card.link;
     imagePopupPhoto.alt = card.name;
     imagePopupCaption.textContent = card.name;
     openPopup(imagePopup);
   });
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
 
-  //Close the image popup window. AKA => "UnZooming"//
+  //
+  // ──── CLOSE THE IMAGE POPUP WINDOW AKA UN ZOOMING ─────
+  //
   imagePopupCloseButton.addEventListener("click", () => {
     closePopup(imagePopup);
   });
@@ -157,20 +215,31 @@ function createCard(card) {
       closePopup(imagePopup);
     }
   });
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────────
 
-  return cardElement; // On this state the card element contains all the functions needed //
+  return cardElement; //All our code inside this return :)
 }
 
-//Openning and closing our add card popup//
+//
+// ──── OPENING AND CLOSING OUR ADD CARD POPUP ─────
+//
 addButton.addEventListener("click", () => {
   openPopup(addImagePopup);
-  //When our popup is open we need our EventListener
 });
 addCardPopupCloseButton.addEventListener("click", () => {
   closePopup(addImagePopup);
 });
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
-// Add card //
+//
+// ──────────────────────────────────────────────────────── III ──────────
+//   :::::: A D D   C A R D : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────
+//
 addCardPopupForm.addEventListener("submit", (evt) => {
   const addCardPopupCaption = document.querySelector(
     ".popup__input_addPhoto_caption"
@@ -190,8 +259,13 @@ addCardPopupForm.addEventListener("submit", (evt) => {
   addCardPopupForm.reset();
 });
 
-//Create our layout//
+//
+// ───── CREATE OUR LAYOUT ─────
+//
 const card = createCard(initialCards);
 initialCards.forEach((card) => {
   elementsSection.append(createCard(card));
 });
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
