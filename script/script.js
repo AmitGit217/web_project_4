@@ -7,6 +7,20 @@ const imagePopup = document.querySelector(".imagePopup");
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
+//
+// ───── CLOSE POPUP FROM THE OVERLAY ───────────────────────────────────────
+//
+const closeFromOverlay = (e) => {
+  const openedPopup = document.querySelector(".popup_show");
+  if (e.target === e.currentTarget) {
+    closePopup(openedPopup);
+  } else {
+    return;
+  }
+};
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 
 //
 // ─── GLOBAL FUNCTIONS FOR OPENING AND CLOSING POPUPS ──────────────────────────────
@@ -14,9 +28,11 @@ const imagePopup = document.querySelector(".imagePopup");
 function openPopup(popup) {
   popup.classList.add("popup_show");
   window.addEventListener("keydown", closeFromEsc);
+  popup.addEventListener("click", closeFromOverlay);
 }
 function closePopup(popup) {
   popup.classList.remove("popup_show");
+  popup.removeEventListener("click", closeFromOverlay);
   window.removeEventListener("keydown", closeFromEsc);
 }
 // ────────────────────────────────────────────────────────────────────────────────
@@ -66,27 +82,6 @@ profileEditButton.addEventListener("click", () => {
 });
 profilePopupCloseButton.addEventListener("click", () => {
   closePopup(editProfilePopup);
-});
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-
-//
-// ───── CLOSE POPUP FROM THE OVERLAY ───────────────────────────────────────
-//
-editProfilePopup.addEventListener("click", (e) => {
-  if (e.target !== e.currentTarget) {
-    return;
-  } else {
-    closePopup(editProfilePopup);
-  }
-});
-addCardPopup.addEventListener("click", (e) => {
-  if (e.target !== e.currentTarget) {
-    return;
-  } else {
-    closePopup(addCardPopup);
-  }
 });
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
