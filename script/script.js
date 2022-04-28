@@ -201,13 +201,6 @@ function createCard(card) {
   imagePopupCloseButton.addEventListener("click", () => {
     closePopup(imagePopup);
   });
-  imagePopup.addEventListener("click", (e) => {
-    if (e.target !== e.currentTarget) {
-      return;
-    } else {
-      closePopup(imagePopup);
-    }
-  });
   // ────────────────────────────────────────────────────────────────────────────────
   // ────────────────────────────────────────────────────────────────────────────────
   // ────────────────────────────────────────────────────────────────────────────────
