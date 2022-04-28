@@ -17,24 +17,6 @@ const closeFromOverlay = (e) => {
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
-
-//
-// ─── GLOBAL FUNCTIONS FOR OPENING AND CLOSING POPUPS ──────────────────────────────
-//
-function openPopup(popup) {
-  popup.classList.add("popup_show");
-  window.addEventListener("keydown", closeFromEsc);
-  popup.addEventListener("click", closeFromOverlay);
-}
-function closePopup(popup) {
-  popup.classList.remove("popup_show");
-  popup.removeEventListener("click", closeFromOverlay);
-  window.removeEventListener("keydown", closeFromEsc);
-}
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-
 //
 // ─── CLOSE WITH ESCAPE KEY ──────────────────────────────────────────────────────
 //
@@ -42,6 +24,23 @@ const closeFromEsc = (e) => {
   const openedPopup = document.querySelector(".popup_show");
   e.key === "Escape" ? closePopup(openedPopup) : false;
 };
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+
+//
+// ─── GLOBAL FUNCTIONS FOR OPENING AND CLOSING POPUPS ──────────────────────────────
+//
+function openPopup(popup) {
+  popup.classList.add("popup_show");
+  window.addEventListener("keydown", closeFromEsc);
+  popup.addEventListener("mousedown", closeFromOverlay);
+}
+function closePopup(popup) {
+  popup.classList.remove("popup_show");
+  popup.removeEventListener("mousedown", closeFromOverlay);
+  window.removeEventListener("keydown", closeFromEsc);
+}
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
