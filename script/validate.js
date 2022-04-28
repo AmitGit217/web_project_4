@@ -1,6 +1,6 @@
 //
 // ────────────────────────────────────────────────────────────────────────────────────────── I ────────
-//   :::::: A N   O B J E C T   T H A T   W I L L   C O N T A I N   A L L   O U R   V A R I A B L E S :
+//   :::::: A N   O B J E C T   T H A T   W I L L   C O N T A I N   A L L   O U R   E L E M E N T S :
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────
 //
 const configObject = {
@@ -68,17 +68,28 @@ const hasInvalidInput = (inputList) => {
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
-
+//
+// ─── CONTROL THE BUTTON STATE ─────
+//
+const disableButtonState = (buttonElement, settings) => {
+  buttonElement.classList.add(settings.inactiveButtonClass);
+  buttonElement.setAttribute("disabled", true);
+};
+const enableButtonState = (buttonElement, settings) => {
+  buttonElement.classList.remove(settings.inactiveButtonClass);
+  buttonElement.removeAttribute("disabled");
+};
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────────
 //
 // ───── CHANGE BUTTON STATE BASED ON THE GIVEN BOOLEAN VALUE INSIDE ─────
 //
 const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.setAttribute("disabled", true);
+    disableButtonState(buttonElement, settings);
   } else {
-    buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.removeAttribute("disabled");
+    enableButtonState(buttonElement, settings);
   }
 };
 // ────────────────────────────────────────────────────────────────────────────────
@@ -89,9 +100,7 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
 // ─────TAKE OUR WANTED INPUTS AND LET THEM LISTEN TO THE INPUT EVENT ─────
 //
 const setEventListeners = (formElement, settings) => {
-  const inputList = Array.from(
-    formElement.querySelectorAll(settings.inputSelector)
-  );
+  const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
   const buttonElement = formElement.querySelector(
     settings.submitButtonSelector
   );
@@ -110,12 +119,11 @@ const setEventListeners = (formElement, settings) => {
 //
 // ──── RESET OUR FORM AFTER SUBMITTING ─────
 //
-const resetFromValidation = (formElement, settings) => {
+const resetFromValidationState = (formElement, settings) => {
   const buttonElement = formElement.querySelector(
     settings.submitButtonSelector
   );
-  buttonElement.classList.add(settings.inactiveButtonClass);
-  buttonElement.setAttribute("disabled", "disabled");
+  disableButtonState(buttonElement, settings);
 };
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -129,7 +137,7 @@ const enableValidation = (settings) => {
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
-      resetFromValidation(formElement, settings);
+      resetFromValidationState(formElement, settings);
     });
     setEventListeners(formElement, settings);
   });
