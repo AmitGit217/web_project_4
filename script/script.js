@@ -4,6 +4,7 @@
 const editProfilePopup = document.querySelector("#profilePopup");
 const addCardPopup = document.querySelector("#addImagePopup");
 const imagePopup = document.querySelector(".imagePopup");
+const openedPopup = document.querySelector(".popup_show");
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -31,7 +32,6 @@ const closeFromEsc = (e) => {
     closePopup(editProfilePopup) ||
       closePopup(addCardPopup) ||
       closePopup(imagePopup);
-    window.removeEventListener("keydown", closeFromEsc);
   }
 };
 // ────────────────────────────────────────────────────────────────────────────────

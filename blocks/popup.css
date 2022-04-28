@@ -114,6 +114,10 @@
 }
 .popup__submit-button_inactive {
   opacity: 0.2;
+  cursor: auto;
+}
+.popup__submit-button_inactive:hover {
+  opacity: 0.2;
 }
 
 .popup_show {
