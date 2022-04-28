@@ -75,10 +75,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.setAttribute("disabled", "disabled");
+    buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.removeAttribute("disabled", "disabled");
+    buttonElement.removeAttribute("disabled");
   }
 };
 // ────────────────────────────────────────────────────────────────────────────────
