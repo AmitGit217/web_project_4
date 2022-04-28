@@ -4,7 +4,6 @@
 const editProfilePopup = document.querySelector("#profilePopup");
 const addCardPopup = document.querySelector("#addImagePopup");
 const imagePopup = document.querySelector(".imagePopup");
-const openedPopup = document.querySelector(".popup_show");
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -28,10 +27,9 @@ function closePopup(popup) {
 // ─── CLOSE WITH ESCAPE KEY ──────────────────────────────────────────────────────
 //
 const closeFromEsc = (e) => {
+  const openedPopup = document.querySelector(".popup_show");
   if (e.key === "Escape") {
-    closePopup(editProfilePopup) ||
-      closePopup(addCardPopup) ||
-      closePopup(imagePopup);
+    closePopup(openedPopup);
   }
 };
 // ────────────────────────────────────────────────────────────────────────────────
