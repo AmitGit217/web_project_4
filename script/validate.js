@@ -47,11 +47,9 @@ const hideInputError = (formElement, inputElement, settings) => {
 // ─────── CHECK IF THE FORM ITSELF IS VALID ─────
 //
 const checkInputValidity = (formElement, inputElement, settings) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, settings);
-  } else {
-    hideInputError(formElement, inputElement, settings);
-  }
+  !inputElement.validity.valid
+    ? showInputError(formElement, inputElement, settings)
+    : hideInputError(formElement, inputElement, settings);
 };
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -86,11 +84,9 @@ const enableButtonState = (buttonElement, settings) => {
 // ───── CHANGE BUTTON STATE BASED ON THE GIVEN BOOLEAN VALUE INSIDE ─────
 //
 const toggleButtonState = (inputList, buttonElement, settings) => {
-  if (hasInvalidInput(inputList)) {
-    disableButtonState(buttonElement, settings);
-  } else {
-    enableButtonState(buttonElement, settings);
-  }
+  hasInvalidInput(inputList)
+    ? disableButtonState(buttonElement, settings)
+    : enableButtonState(buttonElement, settings);
 };
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -133,7 +129,7 @@ const resetFromValidationState = (formElement, settings) => {
 // ─────── TAKE OUR FORMS AND LOOP INSIDE THEM TO RUN ALL THE FUNCTIONS ABOVE ─────
 //
 const enableValidation = (settings) => {
-  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  const formList = [...document.querySelectorAll(settings.formSelector)];
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();

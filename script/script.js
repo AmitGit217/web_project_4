@@ -12,11 +12,7 @@ const imagePopup = document.querySelector(".imagePopup");
 //
 const closeFromOverlay = (e) => {
   const openedPopup = document.querySelector(".popup_show");
-  if (e.target === e.currentTarget) {
-    closePopup(openedPopup);
-  } else {
-    return;
-  }
+  e.target === e.currentTarget ? closePopup(openedPopup) : false;
 };
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -44,9 +40,7 @@ function closePopup(popup) {
 //
 const closeFromEsc = (e) => {
   const openedPopup = document.querySelector(".popup_show");
-  if (e.key === "Escape") {
-    closePopup(openedPopup);
-  }
+  e.key === "Escape" ? closePopup(openedPopup) : false;
 };
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
