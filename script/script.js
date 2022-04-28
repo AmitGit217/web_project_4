@@ -70,12 +70,10 @@ const profileDescription = document.querySelector(".profile__description");
 //
 // ───── OPEN THE EDIT PROFILE POPUP ───────────────────────────────────────
 //
-profileEditButton.addEventListener("click", () => {
-  openPopup(editProfilePopup);
-});
-profilePopupCloseButton.addEventListener("click", () => {
-  closePopup(editProfilePopup);
-});
+profileEditButton.addEventListener("click", () => openPopup(editProfilePopup));
+profilePopupCloseButton.addEventListener("click", () =>
+  closePopup(editProfilePopup)
+);
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
@@ -204,12 +202,10 @@ function createCard(card) {
 //
 // ──── OPENING AND CLOSING OUR ADD CARD POPUP ─────
 //
-addButton.addEventListener("click", () => {
-  openPopup(addImagePopup);
-});
-addCardPopupCloseButton.addEventListener("click", () => {
-  closePopup(addImagePopup);
-});
+addButton.addEventListener("click", () => openPopup(addImagePopup));
+addCardPopupCloseButton.addEventListener("click", () =>
+  closePopup(addImagePopup)
+);
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
