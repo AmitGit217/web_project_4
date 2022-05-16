@@ -1,4 +1,4 @@
-import { createCardsGrid } from "./Card.mjs";
+import { createCardsGrid } from "./Card.js";
 
 createCardsGrid();
 //
