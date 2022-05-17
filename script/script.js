@@ -33,12 +33,12 @@ const closeFromEsc = (e) => {
 //
 // ─── GLOBAL FUNCTIONS FOR OPENING AND CLOSING POPUPS ──────────────────────────────
 //
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_show");
   window.addEventListener("keydown", closeFromEsc);
   popup.addEventListener("mousedown", closeFromOverlay);
 }
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("popup_show");
   popup.removeEventListener("mousedown", closeFromOverlay);
   window.removeEventListener("keydown", closeFromEsc);

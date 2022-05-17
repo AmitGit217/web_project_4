@@ -1,3 +1,5 @@
+import { openPopup, closePopup } from "./script.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +26,7 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
+const imagePopup = document.querySelector(".imagePopup");
 
 export class Card {
   constructor(data, template) {
@@ -51,15 +54,37 @@ export class Card {
       likeButton.classList.toggle("card__like-button_active");
     });
   }
+  _zoomCard() {
+    const imagePopupPhoto = document.querySelector(".imagePopup__image");
+    const imagePopupCaption = document.querySelector(".imagePopup__caption");
+    this._card.querySelector(".card__image").addEventListener("click", () => {
+      imagePopupPhoto.src = this._link;
+      imagePopupPhoto.alt = this._text;
+      imagePopupCaption.textContent = this._text;
+      openPopup(imagePopup);
+      this._unZoom();
+    });
+  }
+  _unZoom() {
+    const closeButton = imagePopup.querySelector(".imagePopup__closeButton");
+    const unZoom = () => {
+      closePopup(imagePopup);
+      closeButton.removeEventListener("click", unZoom);
+    };
+    closeButton.addEventListener("click", unZoom);
+  }
   _removeCard() {
     const removeButton = this._card.querySelector(".card__removeButton");
-    removeButton.addEventListener("click", () => {
+    const removeCard = () => {
       this._card.remove();
-    });
+      removeButton.removeEventListener("click", removeCard); // I don't know if this statement is necessary, but it is indeed defensive
+    };
+    removeButton.addEventListener("click", removeCard);
   }
   _setEventListeners() {
     this._toggleLike();
     this._removeCard();
+    this._zoomCard();
   }
 }
 
