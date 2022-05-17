@@ -24,6 +24,7 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
+
 export class Card {
   constructor(data, template) {
     this._text = data.name;
@@ -41,15 +42,25 @@ export class Card {
     this._card = this._getTemplate();
     this._card.querySelector(".card__image").src = this._link;
     this._card.querySelector(".card__caption").textContent = this._text;
+    this._setEventListeners();
     return this._card;
+  }
+  _toggleLike() {
+    const likeButton = this._card.querySelector(".card__like-button");
+    likeButton.addEventListener("click", () => {
+      likeButton.classList.toggle("card__like-button_active");
+    });
+  }
+  _setEventListeners() {
+    this._toggleLike();
   }
 }
 
-const cardListItems = document.querySelector(".elements");
+const cardsSection = document.querySelector(".elements");
 initialCards.forEach((item) => {
-  const cardInheritance = new Card(item, "#card-template");
-  const cardElement = cardInheritance.generateCard();
-  cardListItems.appendChild(cardElement);
+  const card = new Card(item, "#card-template");
+  const cardElement = card.generateCard();
+  cardsSection.appendChild(cardElement);
 });
 
 //
