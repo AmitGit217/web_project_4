@@ -1,61 +1,56 @@
 import { Card } from "./Card.js";
-
+import { openPopup, closePopup } from "./globalFunctions.js";
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg",
+  },
+];
 //
 // ─── GET THE MAIN POPUPS ────────────────────────────────────────────────────────
 //
+const addCardPopupForm = document.querySelector("#addImagePopup__form");
+const cardsSection = document.querySelector(".elements");
+addCardPopupForm.addEventListener("submit", () => {
+  const data = {
+    name: "test",
+    link: "test",
+  };
+  const newCard = new Card(data, "#card-template");
+  const cardElement = newCard.generateCard();
+  cardsSection.prepend(cardElement);
+});
+
+initialCards.forEach((item) => {
+  const card = new Card(item, "#card-template");
+  const cardElement = card.generateCard();
+  cardsSection.appendChild(cardElement);
+});
+
 const editProfilePopup = document.querySelector("#profilePopup");
 const addCardPopup = document.querySelector("#addImagePopup");
 const imagePopup = document.querySelector(".imagePopup");
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-//
-// ───── CLOSE POPUP FROM THE OVERLAY ───────────────────────────────────────
-//
-const closeFromOverlay = (e) => {
-  const openedPopup = document.querySelector(".popup_show");
-  e.target === e.currentTarget ? closePopup(openedPopup) : false;
-};
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-//
-// ─── CLOSE WITH ESCAPE KEY ──────────────────────────────────────────────────────
-//
-const closeFromEsc = (e) => {
-  const openedPopup = document.querySelector(".popup_show");
-  e.key === "Escape" ? closePopup(openedPopup) : false;
-};
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
 
-//
-// ─── GLOBAL FUNCTIONS FOR OPENING AND CLOSING POPUPS ──────────────────────────────
-//
-export function openPopup(popup) {
-  popup.classList.add("popup_show");
-  window.addEventListener("keydown", closeFromEsc);
-  popup.addEventListener("mousedown", closeFromOverlay);
-}
-export function closePopup(popup) {
-  popup.classList.remove("popup_show");
-  popup.removeEventListener("mousedown", closeFromOverlay);
-  window.removeEventListener("keydown", closeFromEsc);
-}
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────────
-
-//
-// ────────────────────────────────────────────────────────────────── II ──────────
-//   :::::: P R O F I L E   P O P U P : :  :   :    :     :        :          :
-// ────────────────────────────────────────────────────────────────────────────
-//
-
-//
-// ───OUR ELEMENTS FROM THE DOM ───────────────────────────────────────────────
-//
 const profilePopupForm = document.querySelector("#profilePopup__form");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
 const profilePopupCloseButton = document.querySelector(
