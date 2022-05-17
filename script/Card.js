@@ -1,6 +1,58 @@
 import { openPopup, closePopup } from "./globalFunctions.js";
 
-const imagePopup = document.querySelector(".imagePopup");
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg",
+  },
+];
+const popupSettings = {
+  inputCaption: ".popup__input_addPhoto_caption",
+  inputLink: ".popup__input_addPhoto_ImageURL",
+  cardForm: "#addImagePopup__form",
+  addCardPopup: "#addImagePopup",
+};
+const addCardPopupCaption = document.querySelector(popupSettings.inputCaption);
+const addCardPopupURL = document.querySelector(popupSettings.inputLink);
+const addCardPopupForm = document.querySelector(popupSettings.cardForm);
+const addCardPopup = document.querySelector(popupSettings.addCardPopup);
+
+const cardSettings = {
+  cardsSection: ".elements",
+  cardImagePopup: ".imagePopup",
+  cardsTemplate: "#card-template",
+  cardClass: ".card",
+  cardImageClass: ".card__image",
+  cardCationClass: ".card__caption",
+  cardRemoveButton: ".card__removeButton",
+  cardLikeButton: ".card__like-button",
+  cardLikeButtonActive: "card__like-button_active",
+  cardZoomImageClass: ".imagePopup__image",
+  cardZoomCaptionClass: ".imagePopup__caption",
+  cardZoomCloseButton: ".imagePopup__closeButton",
+};
+const cardsSection = document.querySelector(cardSettings.cardsSection);
+const imagePopup = document.querySelector(cardSettings.cardImagePopup);
 
 export class Card {
   constructor(data, template) {
@@ -11,26 +63,31 @@ export class Card {
   _getTemplate() {
     const card = document
       .querySelector(this._template)
-      .content.querySelector(".card")
+      .content.querySelector(cardSettings.cardClass)
       .cloneNode(true);
     return card;
   }
   generateCard() {
     this._card = this._getTemplate();
-    this._card.querySelector(".card__image").src = this._link;
-    this._card.querySelector(".card__caption").textContent = this._text;
+    this._card.querySelector(cardSettings.cardImageClass).src = this._link;
+    this._card.querySelector(cardSettings.cardCationClass).textContent =
+      this._text;
     this._setEventListeners();
     return this._card;
   }
   _toggleLike() {
-    const likeButton = this._card.querySelector(".card__like-button");
+    const likeButton = this._card.querySelector(cardSettings.cardLikeButton);
     likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("card__like-button_active");
+      likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
     });
   }
   _zoomCard() {
-    const imagePopupPhoto = document.querySelector(".imagePopup__image");
-    const imagePopupCaption = document.querySelector(".imagePopup__caption");
+    const imagePopupPhoto = document.querySelector(
+      cardSettings.cardZoomImageClass
+    );
+    const imagePopupCaption = document.querySelector(
+      cardSettings.cardZoomCaptionClass
+    );
     this._card.querySelector(".card__image").addEventListener("click", () => {
       imagePopupPhoto.src = this._link;
       imagePopupPhoto.alt = this._text;
@@ -40,7 +97,9 @@ export class Card {
     });
   }
   _unZoom() {
-    const closeButton = imagePopup.querySelector(".imagePopup__closeButton");
+    const closeButton = imagePopup.querySelector(
+      cardSettings.cardZoomCloseButton
+    );
     const unZoom = () => {
       closePopup(imagePopup);
       closeButton.removeEventListener("click", unZoom);
@@ -48,7 +107,9 @@ export class Card {
     closeButton.addEventListener("click", unZoom);
   }
   _removeCard() {
-    const removeButton = this._card.querySelector(".card__removeButton");
+    const removeButton = this._card.querySelector(
+      cardSettings.cardRemoveButton
+    );
     const removeCard = () => {
       this._card.remove();
       removeButton.removeEventListener("click", removeCard); // I don't know if this statement is necessary, but it is indeed defensive
@@ -61,7 +122,23 @@ export class Card {
     this._zoomCard();
   }
 }
-
+addCardPopupForm.addEventListener("submit", () => {
+  const data = {
+    name: addCardPopupCaption.value,
+    link: addCardPopupURL.value,
+  };
+  const newCard = new Card(data, cardSettings.cardsTemplate);
+  const cardElement = newCard.generateCard();
+  cardsSection.prepend(cardElement);
+  closePopup(addCardPopup);
+  addCardPopupForm.reset();
+});
+initialCards.forEach((item) => {
+  const card = new Card(item, cardSettings.cardsTemplate);
+  const cardElement = card.generateCard();
+  cardsSection.appendChild(cardElement);
+});
+//////////////////////////////////////////////////////
 //
 // ──── CARDS TEMPLATE AND ZOOM ON VARIABLES ─────
 //
