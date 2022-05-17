@@ -26,27 +26,32 @@ const initialCards = [
 ];
 export class Card {
   constructor(data, template) {
-    this.text = data.name;
-    this.link = data.link;
-    this.template = template;
+    this._text = data.name;
+    this._link = data.link;
+    this._template = template;
   }
-  _createCard(targetSection, cardClass, cardImageClass, cardCationClass) {
-    const elementsSection = document.querySelector(targetSection);
-    const cardTemplate = document.querySelector(this.template).content;
-    const cardElement = cardTemplate.querySelector(cardClass).cloneNode(true);
-    const imageElement = cardElement.querySelector(cardImageClass);
-    imageElement.src = this.link;
-    imageElement.alt = this.text;
-    cardElement.querySelector(cardCationClass).textContent = this.text;
-    elementsSection.appendChild(cardElement);
+  _getTemplate() {
+    const card = document
+      .querySelector(this._template)
+      .content.querySelector(".card")
+      .cloneNode(true);
+    return card;
+  }
+  generateCard() {
+    this._card = this._getTemplate();
+    this._card.querySelector(".card__image").src = this._link;
+    this._card.querySelector(".card__caption").textContent = this._text;
+    return this._card;
   }
 }
-export function createCardsGrid() {
-  initialCards.forEach((item) => {
-    const card = new Card(item, "#card-template");
-    card._createCard(".elements", ".card", ".card__image", ".card__caption");
-  });
-}
+
+const cardListItems = document.querySelector(".elements");
+initialCards.forEach((item) => {
+  const cardInheritance = new Card(item, "#card-template");
+  const cardElement = cardInheritance.generateCard();
+  cardListItems.appendChild(cardElement);
+});
+
 //
 // ──── CARDS TEMPLATE AND ZOOM ON VARIABLES ─────
 //

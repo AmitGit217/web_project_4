@@ -1,6 +1,5 @@
-import { createCardsGrid } from "./Card.js";
+import { Card } from "./Card.js";
 
-createCardsGrid();
 //
 // ─── GET THE MAIN POPUPS ────────────────────────────────────────────────────────
 //
