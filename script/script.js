@@ -1,5 +1,7 @@
 import { Card } from "./Card.js";
 import { openPopup, closePopup } from "./globalFunctions.js";
+
+// Rendering Card class & Adding a new card inheritance
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -26,26 +28,31 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-//
-// ─── GET THE MAIN POPUPS ────────────────────────────────────────────────────────
-//
+const addCardPopupCaption = document.querySelector(
+  ".popup__input_addPhoto_caption"
+);
+const addCardPopupURL = document.querySelector(
+  ".popup__input_addPhoto_ImageURL"
+);
 const addCardPopupForm = document.querySelector("#addImagePopup__form");
 const cardsSection = document.querySelector(".elements");
 addCardPopupForm.addEventListener("submit", () => {
   const data = {
-    name: "test",
-    link: "test",
+    name: addCardPopupCaption.value,
+    link: addCardPopupURL.value,
   };
   const newCard = new Card(data, "#card-template");
   const cardElement = newCard.generateCard();
   cardsSection.prepend(cardElement);
+  closePopup(addCardPopup);
+  addCardPopupForm.reset();
 });
-
 initialCards.forEach((item) => {
   const card = new Card(item, "#card-template");
   const cardElement = card.generateCard();
   cardsSection.appendChild(cardElement);
 });
+//////////////////////////////////////////////////////
 
 const editProfilePopup = document.querySelector("#profilePopup");
 const addCardPopup = document.querySelector("#addImagePopup");
