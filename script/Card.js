@@ -51,8 +51,15 @@ export class Card {
       likeButton.classList.toggle("card__like-button_active");
     });
   }
+  _removeCard() {
+    const removeButton = this._card.querySelector(".card__removeButton");
+    removeButton.addEventListener("click", () => {
+      this._card.remove();
+    });
+  }
   _setEventListeners() {
     this._toggleLike();
+    this._removeCard();
   }
 }
 
