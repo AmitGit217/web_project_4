@@ -9,9 +9,11 @@ import {
 } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
 import { FormValidation, configObject } from "./validate.js";
-
-const newForm = new FormValidation(configObject, ".form");
-newForm.enableValidation();
+const formList = [...document.querySelectorAll(configObject.formSelector)];
+formList.forEach((form) => {
+  const newForm = new FormValidation(configObject, form);
+  newForm.enableValidation();
+});
 
 const initialCards = [
   {

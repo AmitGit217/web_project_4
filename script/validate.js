@@ -21,15 +21,26 @@ class FormValidation {
     this._formElement = formElement;
   }
 
+  _disableButtonState() {
+    const buttonElement = this._formElement.querySelector(
+      this._settings.submitButtonSelector
+    );
+    buttonElement.classList.add(this._settings.inactiveButtonClass);
+    buttonElement.setAttribute("disabled", true);
+  }
+  _resetFormValidationState() {
+    this._disableButtonState();
+  }
   enableValidation() {
-    const formList = [...document.querySelectorAll(this._formElement)];
-    formList.forEach((formElement) => {
-      formElement.addEventListener("submit", (evt) => {
-        evt.preventDefault();
-      });
+    const form = this._formElement;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._resetFormValidationState();
     });
   }
 }
+
+export { configObject, FormValidation };
 
 //
 // ──────── SHOW ERROR MESSAGE FOR SPECIFIC CLASS RECOGNIZED BY THE INPUT'S ID ─────
@@ -157,4 +168,3 @@ class FormValidation {
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
 // ────────────────────────────────────────────────────────────────────────────────
-export { configObject, FormValidation };
