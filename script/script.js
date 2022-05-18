@@ -8,6 +8,8 @@ import {
   cardSettings,
 } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
+import { enableValidation, configObject } from "./validate.js";
+enableValidation(configObject);
 
 const initialCards = [
   {
