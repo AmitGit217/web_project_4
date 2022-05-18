@@ -28,15 +28,46 @@ class FormValidation {
     buttonElement.classList.add(this._settings.inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
   }
+  _enableButtonState() {
+    const buttonElement = this._formElement.querySelector(
+      this._settings.submitButtonSelector
+    );
+    buttonElement.classList.remove(this._settings.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", true);
+  }
   _resetFormValidationState() {
     this._disableButtonState();
   }
+  _hasInvalidInput() {
+    const inputList = [
+      ...this._formElement.querySelectorAll(this._settings.inputSelector),
+    ];
+    return inputList.some((input) => {
+      return !input.validity.valid
+        ? this._disableButtonState()
+        : this._enableButtonState();
+    });
+  }
+  _setEventListeners() {
+    const inputList = [
+      ...this._formElement.querySelectorAll(this._settings.inputSelector),
+    ];
+
+    inputList.forEach((input) => {
+      input.addEventListener("input", () => {
+        this._hasInvalidInput();
+      });
+    });
+  }
+
   enableValidation() {
     const form = this._formElement;
+    this._resetFormValidationState();
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       this._resetFormValidationState();
     });
+    this._setEventListeners();
   }
 }
 
