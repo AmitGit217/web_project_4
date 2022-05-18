@@ -8,8 +8,10 @@ import {
   cardSettings,
 } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
-import { enableValidation, configObject } from "./validate.js";
-enableValidation(configObject);
+import { FormValidation, configObject } from "./validate.js";
+
+const newForm = new FormValidation(configObject, ".form");
+newForm.enableValidation();
 
 const initialCards = [
   {
