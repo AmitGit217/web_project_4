@@ -87,3 +87,11 @@ function changeProfileData(event) {
   closePopup(editProfilePopup);
 }
 profilePopupForm.addEventListener("submit", changeProfileData);
+const addButton = document.querySelector(".profile__add-button");
+const addCardPopupCloseButton = document.querySelector(
+  "#add-popup__close-button"
+);
+addButton.addEventListener("click", () => openPopup(addImagePopup));
+addCardPopupCloseButton.addEventListener("click", () =>
+  closePopup(addImagePopup)
+);

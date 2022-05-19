@@ -9,7 +9,7 @@ Responsive web application for all modern screens.
 - Add and remove an image
 - Like an image
 - Zoom on an image
-- Form validation usign Object notation and scalable scripts
+- Form validation using Object notation and scalable scripts
 
 **Technologies**
 

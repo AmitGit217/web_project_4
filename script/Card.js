@@ -25,6 +25,7 @@ const cardSettings = {
 };
 const cardsSection = document.querySelector(cardSettings.cardsSection);
 const imagePopup = document.querySelector(cardSettings.cardImagePopup);
+
 export class Card {
   constructor(data, template) {
     this._text = data.name;

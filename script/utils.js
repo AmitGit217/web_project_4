@@ -17,12 +17,3 @@ export function closePopup(popup) {
   popup.removeEventListener("mousedown", closeFromOverlay);
   window.removeEventListener("keydown", closeFromEsc);
 }
-
-const addButton = document.querySelector(".profile__add-button");
-const addCardPopupCloseButton = document.querySelector(
-  "#add-popup__close-button"
-);
-addButton.addEventListener("click", () => openPopup(addImagePopup));
-addCardPopupCloseButton.addEventListener("click", () =>
-  closePopup(addImagePopup)
-);
