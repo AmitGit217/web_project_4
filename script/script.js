@@ -6,9 +6,9 @@ import {
   addCardPopup,
   cardsSection,
   cardSettings,
-} from "./Card";
-import { openPopup, closePopup } from "./utils";
-import { FormValidation, configObject } from "./FormValidation";
+} from "./Card.js";
+import { openPopup, closePopup } from "./utils.js";
+import { FormValidation, configObject } from "./FormValidation.JS";
 const formList = [...document.querySelectorAll(configObject.formSelector)];
 formList.forEach((form) => {
   const newForm = new FormValidation(configObject, form);

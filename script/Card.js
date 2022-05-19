@@ -1,14 +1,11 @@
-import { openPopup, closePopup } from "./utils";
+import { openPopup, closePopup } from "./utils.js";
 const popupSettings = {
   inputCaption: ".popup__input_addPhoto_caption",
   inputLink: ".popup__input_addPhoto_ImageURL",
   cardForm: "#addImagePopup__form",
   addCardPopup: "#addImagePopup",
 };
-const addCardPopupCaption = document.querySelector(popupSettings.inputCaption);
-const addCardPopupURL = document.querySelector(popupSettings.inputLink);
-const addCardPopupForm = document.querySelector(popupSettings.cardForm);
-const addCardPopup = document.querySelector(popupSettings.addCardPopup);
+
 const cardSettings = {
   cardsSection: ".elements",
   cardImagePopup: ".imagePopup",
@@ -23,7 +20,6 @@ const cardSettings = {
   cardZoomCaptionClass: ".imagePopup__caption",
   cardZoomCloseButton: ".imagePopup__closeButton",
 };
-const cardsSection = document.querySelector(cardSettings.cardsSection);
 const imagePopup = document.querySelector(cardSettings.cardImagePopup);
 
 export class Card {
@@ -76,7 +72,7 @@ export class Card {
     );
     const removeCard = () => {
       this._card.remove();
-      removeButton.removeEventListener("click", removeCard); // I don't know if this statement is necessary, but it is indeed defensive
+      removeButton.removeEventListener("click", removeCard);
     };
     removeButton.addEventListener("click", removeCard);
   }
@@ -94,6 +90,12 @@ export class Card {
     return this._card;
   }
 }
+
+const addCardPopupCaption = document.querySelector(popupSettings.inputCaption);
+const addCardPopupURL = document.querySelector(popupSettings.inputLink);
+const addCardPopupForm = document.querySelector(popupSettings.cardForm);
+const addCardPopup = document.querySelector(popupSettings.addCardPopup);
+const cardsSection = document.querySelector(cardSettings.cardsSection);
 export {
   addCardPopupCaption,
   addCardPopupURL,
