@@ -1,4 +1,4 @@
-import { openPopup, closePopup } from "./utils.js";
+import { openPopup, closePopup } from "./utils";
 const popupSettings = {
   inputCaption: ".popup__input_addPhoto_caption",
   inputLink: ".popup__input_addPhoto_ImageURL",
