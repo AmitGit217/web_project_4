@@ -1,8 +1,8 @@
-export const closeFromOverlay = (e) => {
+const closeFromOverlay = (e) => {
   const openedPopup = document.querySelector(".popup_show");
   e.target === e.currentTarget ? closePopup(openedPopup) : false;
 };
-export const closeFromEsc = (e) => {
+const closeFromEsc = (e) => {
   const openedPopup = document.querySelector(".popup_show");
   e.key === "Escape" ? closePopup(openedPopup) : false;
 };

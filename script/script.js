@@ -8,7 +8,7 @@ import {
   cardSettings,
 } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
-import { FormValidation, configObject } from "./FormValidation.JS";
+import { FormValidation, configObject } from "./FormValidation.js";
 const formList = [...document.querySelectorAll(configObject.formSelector)];
 formList.forEach((form) => {
   const newForm = new FormValidation(configObject, form);
