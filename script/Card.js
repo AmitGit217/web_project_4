@@ -8,7 +8,7 @@ const popupSettings = {
 
 const cardSettings = {
   cardsSection: ".elements",
-  cardImagePopup: ".popup_image",
+  cardImagePopup: ".popupImage",
   cardsTemplate: "#card-template",
   cardClass: ".card",
   cardImageClass: ".card__image",
@@ -16,8 +16,8 @@ const cardSettings = {
   cardRemoveButton: ".card__removeButton",
   cardLikeButton: ".card__like-button",
   cardLikeButtonActive: "card__like-button_active",
-  cardZoomImageClass: ".popup_image__image",
-  cardZoomCaptionClass: ".popup_image__caption",
+  cardZoomImageClass: ".popupImage__image",
+  cardZoomCaptionClass: ".popupImage__caption",
 };
 const imagePopup = document.querySelector(cardSettings.cardImagePopup);
 const imagePopupPhoto = document.querySelector(cardSettings.cardZoomImageClass);

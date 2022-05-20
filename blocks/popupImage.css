@@ -1,4 +1,4 @@
-.popup_image {
+.popupImage {
   position: fixed; /* Stay in place */
   display: flex;
   flex-direction: column;
@@ -13,37 +13,22 @@
   align-items: center;
   justify-content: center;
 }
-.popup_image .popup__wrapper {
+.popupImage .popup__wrapper {
   /*This div make the closing button responsive*/
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
-.popup_image__image {
+.popupImage__image {
   max-width: 75vw;
   max-height: 75vh;
 }
-.popup_image .popup__close-button {
-  position: absolute;
-  max-height: 40px;
-  max-width: 40px;
-  top: -45px;
-  right: -45px;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-  background-image: url(../images/Close\ Icon.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  transition: 0.3s;
-}
-.popup_image__closeButton:hover {
+
+.popupImage__closeButton:hover {
   opacity: 0.6;
 }
-.popup_image__caption {
+.popupImage__caption {
   margin: 10px 0 0 0;
   font-family: "Inter", sans-serif;
   font-style: normal;
@@ -53,15 +38,35 @@
   align-self: flex-start;
 }
 
-@media screen and (max-width: 425px) {
-  .popup_image .popup__close-button {
+.popup__close-button_image {
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  right: -35px;
+  top: -35px;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(../images/Close\ Icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: 0.2s;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__close-button_image {
     max-height: 20px;
     max-width: 20px;
     top: -25px;
-    right: -25px;
+    right: -15px;
   }
-  .popup_image {
+  .popupImage {
     width: 100%;
     height: 100%;
+  }
+  .popupImage .popup__wrapper {
+    max-width: 75vw;
   }
 }
