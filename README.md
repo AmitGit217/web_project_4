@@ -24,4 +24,4 @@ Responsive web application for sharing images in a social way.
 - ES6 Object-Oriented-Programming
 - Module JavaScript file system and architecture
 
-### [Show me the project](https://amitgit217.github.io/web_project_4/)
+### - - - [Show me the project](https://amitgit217.github.io/web_project_4/) - - -
