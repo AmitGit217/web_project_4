@@ -53,8 +53,6 @@ addCardPopupForm.addEventListener("submit", () => {
     name: addCardPopupCaption.value,
     link: addCardPopupURL.value,
   };
-  // const newCard = new Card(data, cardSettings.cardsTemplate);
-  // const cardElement = newCard.generateCard();
   const cardElement = createCard(data);
   cardsSection.prepend(cardElement);
   closePopup(addCardPopup);
