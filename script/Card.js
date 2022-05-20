@@ -40,9 +40,6 @@ export class Card {
       cardSettings.cardRemoveButton
     );
   }
-  _getTemplate() {
-    return this._card;
-  }
   _toggleLike() {
     this._likeButton.addEventListener("click", () => {
       this._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
@@ -69,7 +66,6 @@ export class Card {
     this._zoomCard();
   }
   generateCard() {
-    this._card = this._getTemplate();
     this._card.querySelector(cardSettings.cardImageClass).src = this._link;
     this._card.querySelector(cardSettings.cardImageClass).alt = this._text;
     this._card.querySelector(cardSettings.cardCationClass).textContent =
