@@ -1,4 +1,4 @@
-import { openPopup, closePopup } from "./utils.js";
+import { openPopup } from "./utils.js";
 const popupSettings = {
   inputCaption: ".popup__input_addPhoto_caption",
   inputLink: ".popup__input_addPhoto_ImageURL",
@@ -21,7 +21,10 @@ const cardSettings = {
   cardZoomCloseButton: ".imagePopup__closeButton",
 };
 const imagePopup = document.querySelector(cardSettings.cardImagePopup);
-
+const imagePopupPhoto = document.querySelector(cardSettings.cardZoomImageClass);
+const imagePopupCaption = document.querySelector(
+  cardSettings.cardZoomCaptionClass
+);
 export class Card {
   constructor(data, template) {
     this._text = data.name;
@@ -42,12 +45,6 @@ export class Card {
     });
   }
   _zoomCard() {
-    const imagePopupPhoto = document.querySelector(
-      cardSettings.cardZoomImageClass
-    );
-    const imagePopupCaption = document.querySelector(
-      cardSettings.cardZoomCaptionClass
-    );
     this._card.querySelector(".card__image").addEventListener("click", () => {
       imagePopupPhoto.src = this._link;
       imagePopupPhoto.alt = this._text;
@@ -74,6 +71,7 @@ export class Card {
   generateCard() {
     this._card = this._getTemplate();
     this._card.querySelector(cardSettings.cardImageClass).src = this._link;
+    this._card.querySelector(cardSettings.cardImageClass).alt = this._text;
     this._card.querySelector(cardSettings.cardCationClass).textContent =
       this._text;
     this._setEventListeners();
