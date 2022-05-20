@@ -1,10 +1,11 @@
 const closeFromOverlay = (e) => {
-  const openedPopup = document.querySelector(".popup_show");
-  e.target === e.currentTarget ? closePopup(openedPopup) : false;
+  e.target === e.currentTarget ? closePopup(e.currentTarget) : false;
 };
 const closeFromEsc = (e) => {
-  const openedPopup = document.querySelector(".popup_show");
-  e.key === "Escape" ? closePopup(openedPopup) : false;
+  if (e.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_show");
+    closePopup(openedPopup);
+  }
 };
 
 export function openPopup(popup) {
