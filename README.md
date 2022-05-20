@@ -2,20 +2,26 @@
 
 ### Overview
 
-Responsive web application for all modern screens.
+Responsive web application for sharing images in a social way.
+
 **Features**
 
-- Update profile data
-- Add and remove an image
-- Like an image
-- Zoom on an image
-- Form validation using Object notation and scalable scripts
+- Like images
+- Deleting images
+- Adding an image with a caption
+- Edit profile name and description
 
 **Technologies**
 
-- Semantic HTML5
-- CSS3 {flexbox, grid layout}
-- Flat BEM methodology
-- Javascript
+- HTML5
+- CSS3
+- VanillaJS
 
-- [Show me the project](https://amitgit217.github.io/web_project_4/)
+**Implementations**
+
+- BEM Methodology
+- Form validation using JavaScript
+- ES6 Object-Oriented-Programming
+- Module JavaScript file system and architecture
+
+[Show me the project](https://amitgit217.github.io/web_project_4/)
