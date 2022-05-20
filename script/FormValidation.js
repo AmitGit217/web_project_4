@@ -67,9 +67,8 @@ class FormValidation {
   }
 
   enableValidation() {
-    const form = this._formElement;
     this._toggleButtonState();
-    form.addEventListener("submit", (e) => {
+    this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
       this._resetFormValidationState();
     });
