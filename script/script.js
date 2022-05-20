@@ -41,20 +41,27 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
+
+const createCard = (item) => {
+  const card = new Card(item, cardSettings.cardsTemplate);
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
 addCardPopupForm.addEventListener("submit", () => {
   const data = {
     name: addCardPopupCaption.value,
     link: addCardPopupURL.value,
   };
-  const newCard = new Card(data, cardSettings.cardsTemplate);
-  const cardElement = newCard.generateCard();
+  // const newCard = new Card(data, cardSettings.cardsTemplate);
+  // const cardElement = newCard.generateCard();
+  const cardElement = createCard(data);
   cardsSection.prepend(cardElement);
   closePopup(addCardPopup);
   addCardPopupForm.reset();
 });
 initialCards.forEach((item) => {
-  const card = new Card(item, cardSettings.cardsTemplate);
-  const cardElement = card.generateCard();
+  const cardElement = createCard(item);
   cardsSection.appendChild(cardElement);
 });
 
