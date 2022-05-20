@@ -63,9 +63,10 @@ initialCards.forEach((item) => {
 const editProfilePopup = document.querySelector("#profilePopup");
 const profilePopupForm = document.querySelector("#profilePopup__form");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
-const profilePopupCloseButton = document.querySelector(
-  "#profilePopup__close-button"
-);
+const popupsCloseButtons = [
+  ...document.querySelectorAll(".popup__close-button"),
+];
+
 const profilePopupName = document.querySelector(
   ".popup__input_changeProfileData_name"
 );
@@ -76,9 +77,6 @@ const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
 profileEditButton.addEventListener("click", () => openPopup(editProfilePopup));
-profilePopupCloseButton.addEventListener("click", () =>
-  closePopup(editProfilePopup)
-);
 
 function changeProfileData(event) {
   event.preventDefault();
@@ -88,10 +86,11 @@ function changeProfileData(event) {
 }
 profilePopupForm.addEventListener("submit", changeProfileData);
 const addButton = document.querySelector(".profile__add-button");
-const addCardPopupCloseButton = document.querySelector(
-  "#add-popup__close-button"
-);
+
 addButton.addEventListener("click", () => openPopup(addImagePopup));
-addCardPopupCloseButton.addEventListener("click", () =>
-  closePopup(addImagePopup)
-);
+
+popupsCloseButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    closePopup(e.target.parentElement.parentElement);
+  });
+});

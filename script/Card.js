@@ -53,19 +53,19 @@ export class Card {
       imagePopupPhoto.alt = this._text;
       imagePopupCaption.textContent = this._text;
       openPopup(imagePopup);
-      this._unZoom();
+      // this._unZoom();
     });
   }
-  _unZoom() {
-    const closeButton = imagePopup.querySelector(
-      cardSettings.cardZoomCloseButton
-    );
-    const unZoom = () => {
-      closePopup(imagePopup);
-      closeButton.removeEventListener("click", unZoom);
-    };
-    closeButton.addEventListener("click", unZoom);
-  }
+  // _unZoom() {
+  //   const closeButton = imagePopup.querySelector(
+  //     cardSettings.cardZoomCloseButton
+  //   );
+  //   const unZoom = () => {
+  //     closePopup(imagePopup);
+  //     closeButton.removeEventListener("click", unZoom);
+  //   };
+  //   closeButton.addEventListener("click", unZoom);
+  // }
   _removeCard() {
     const removeButton = this._card.querySelector(
       cardSettings.cardRemoveButton

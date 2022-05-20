@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
 }
-.imagePopup__wrapper {
+.imagePopup .popup__wrapper {
   /*This div make the closing button responsive*/
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   max-width: 75vw;
   max-height: 75vh;
 }
-.imagePopup__closeButton {
+.imagePopup .popup__close-button {
   position: absolute;
   min-height: 40px;
   min-width: 40px;
