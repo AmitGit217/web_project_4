@@ -9,11 +9,18 @@ import {
 } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
 import { FormValidation, configObject } from "./FormValidation.js";
-const formList = [...document.querySelectorAll(configObject.formSelector)];
-formList.forEach((form) => {
-  const newForm = new FormValidation(configObject, form);
-  newForm.enableValidation();
-});
+
+const formValidators = {};
+const enableValidations = (configObject) => {
+  const formList = [...document.querySelectorAll(configObject.formSelector)];
+  formList.forEach((form) => {
+    const newFormValidator = new FormValidation(configObject, form);
+    const formName = form.getAttribute("name");
+    formValidators[formName] = newFormValidator;
+    newFormValidator.enableValidation();
+  });
+};
+enableValidations(configObject);
 
 const initialCards = [
   {
@@ -41,7 +48,6 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-
 const createCard = (item) => {
   const card = new Card(item, cardSettings.cardsTemplate);
   const cardElement = card.generateCard();

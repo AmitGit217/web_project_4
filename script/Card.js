@@ -38,6 +38,7 @@ export class Card {
     this._removeButton = this._card.querySelector(
       cardSettings.cardRemoveButton
     );
+    this._image = this._card.querySelector(cardSettings.cardImageClass);
   }
   _toggleLike() {
     this._likeButton.addEventListener("click", () => {
@@ -45,7 +46,7 @@ export class Card {
     });
   }
   _zoomCard() {
-    this._card.querySelector(".card__image").addEventListener("click", () => {
+    this._image.addEventListener("click", () => {
       imagePopupPhoto.src = this._link;
       imagePopupPhoto.alt = this._text;
       imagePopupCaption.textContent = this._text;
@@ -65,8 +66,8 @@ export class Card {
     this._zoomCard();
   }
   generateCard() {
-    this._card.querySelector(cardSettings.cardImageClass).src = this._link;
-    this._card.querySelector(cardSettings.cardImageClass).alt = this._text;
+    this._image.src = this._link;
+    this._image.alt = this._text;
     this._card.querySelector(cardSettings.cardCationClass).textContent =
       this._text;
     this._setEventListeners();
