@@ -95,7 +95,8 @@ const addButton = document.querySelector(".profile__add-button");
 addButton.addEventListener("click", () => openPopup(addImagePopup));
 
 popupsCloseButtons.forEach((button) => {
+  const popup = button.closest(".popup");
   button.addEventListener("click", (e) => {
-    closePopup(e.target.parentElement.parentElement);
+    closePopup(popup);
   });
 });
