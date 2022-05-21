@@ -26,9 +26,6 @@ class FormValidation {
     this._submit.classList.remove(this._settings.inactiveButtonClass);
     this._submit.removeAttribute("disabled", true);
   }
-  _resetFormValidationState() {
-    this._disableButtonState();
-  }
   _hasInvalidInput() {
     return this._inputList.some((input) => {
       return !input.validity.valid;
@@ -39,6 +36,14 @@ class FormValidation {
       ? this._disableButtonState()
       : this._enableButtonState();
   }
+
+  _resetValidation() {
+    this._disableButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideErrorMessage(inputElement);
+    });
+  }
+
   _showErrorMessage(input) {
     const errorMessage = input.validationMessage;
     const errorElement = this._formElement.querySelector(`.${input.id}-error`);
@@ -70,7 +75,7 @@ class FormValidation {
     this._toggleButtonState();
     this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._resetFormValidationState();
+      this._resetValidation();
     });
     this._setEventListeners();
   }
