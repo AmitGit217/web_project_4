@@ -1,4 +1,5 @@
 import "./pages/index.css";
+import { Section } from "./script/Section";
 import {
   Card,
   addCardPopupCaption,
@@ -49,26 +50,33 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-const createCard = (item) => {
-  const card = new Card(item, cardSettings.cardsTemplate);
-  const cardElement = card.generateCard();
-  return cardElement;
-};
-
-addCardPopupForm.addEventListener("submit", () => {
-  const data = {
-    name: addCardPopupCaption.value,
-    link: addCardPopupURL.value,
-  };
-  const cardElement = createCard(data);
-  cardsSection.prepend(cardElement);
-  closePopup(addCardPopup);
-  addCardPopupForm.reset();
-});
-initialCards.forEach((item) => {
-  const cardElement = createCard(item);
-  cardsSection.appendChild(cardElement);
-});
+// const createCard = (item) => {
+//   const card = new Card(item, cardSettings.cardsTemplate);
+//   const cardElement = card.generateCard();
+//   return cardElement;
+// };
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, cardSettings.cardsTemplate);
+      const cardElement = card.generateCard();
+      cardList.setItem(cardElement);
+    },
+  },
+  cardsSection
+);
+cardList.renderItems();
+// addCardPopupForm.addEventListener("submit", () => {
+//   const data = {
+//     name: addCardPopupCaption.value,
+//     link: addCardPopupURL.value,
+//   };
+//   const cardElement = createCard(data);
+//   cardsSection.prepend(cardElement);
+//   closePopup(addCardPopup);
+//   addCardPopupForm.reset();
+// });
 
 //////////////////////////////////////////////////////////////////////////////////
 
