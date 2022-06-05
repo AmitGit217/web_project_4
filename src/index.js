@@ -1,3 +1,4 @@
+import "./pages/index.css";
 import {
   Card,
   addCardPopupCaption,
@@ -6,9 +7,9 @@ import {
   addCardPopup,
   cardsSection,
   cardSettings,
-} from "./Card.js";
-import { openPopup, closePopup } from "./utils.js";
-import { FormValidation, configObject } from "./FormValidation.js";
+} from "./script/Card.js";
+import { openPopup, closePopup } from "./script/utils.js";
+import { FormValidation, configObject } from "./script/FormValidation.js";
 
 const formValidators = {};
 const enableValidations = (configObject) => {
