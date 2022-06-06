@@ -1,7 +1,7 @@
 const closeFromOverlay = (e) => {
   e.target === e.currentTarget ? closePopup(e.currentTarget) : false;
 };
-const closeFromEsc = (e) => {
+export const closeFromEsc = (e) => {
   if (e.key === "Escape") {
     const openedPopup = document.querySelector(".popup_show");
     closePopup(openedPopup);

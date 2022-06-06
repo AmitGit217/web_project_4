@@ -84,9 +84,6 @@ addCardPopupForm.addEventListener("submit", () => {
 const editProfilePopup = document.querySelector("#profilePopup");
 const profilePopupForm = document.querySelector("#profilePopup__form");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
-const popupsCloseButtons = [
-  ...document.querySelectorAll(".popup__close-button"),
-];
 
 const profilePopupName = document.querySelector(
   ".popup__input_changeProfileData_name"
@@ -96,10 +93,14 @@ const profilePopupDescription = document.querySelector(
 );
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+const addButton = document.querySelector(".profile__add-button");
 
 const editProfile = new Popup("#profilePopup");
+const addCard = new Popup("#addImagePopup");
 profileEditButton.addEventListener("click", () => editProfile.open());
+addButton.addEventListener("click", () => addCard.open());
 editProfile.setEventListeners();
+addCard.setEventListeners();
 
 function changeProfileData(event) {
   event.preventDefault();
@@ -108,13 +109,3 @@ function changeProfileData(event) {
   closePopup(editProfilePopup);
 }
 profilePopupForm.addEventListener("submit", changeProfileData);
-const addButton = document.querySelector(".profile__add-button");
-
-addButton.addEventListener("click", () => openPopup(addImagePopup));
-
-popupsCloseButtons.forEach((button) => {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", (e) => {
-    closePopup(popup);
-  });
-});
