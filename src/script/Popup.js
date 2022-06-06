@@ -4,11 +4,11 @@ export class Popup {
     this._closeButton = this._popup.querySelector(".popup__close-button");
     this._isOpen = "popup_show";
   }
-  _handleEscClose(e) {
+  _handleEscClose = (e) => {
     if (e.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   open() {
     this._popup.classList.add(this._isOpen);
@@ -16,8 +16,8 @@ export class Popup {
   }
 
   close() {
-    console.log("triggered");
     this._popup.classList.remove(this._isOpen);
+    document.removeEventListener("keydown", this._handleEscClose);
   }
 
   setEventListeners() {
