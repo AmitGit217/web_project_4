@@ -2,6 +2,7 @@ import "./pages/index.css";
 import { Section } from "./script/Section";
 import { Popup } from "./script/Popup";
 import { PopupWithImage } from "./script/PopupWithImage";
+import { PopupWithForm } from "./script/PopupWithForm";
 import {
   Card,
   addCardPopupCaption,
@@ -69,11 +70,13 @@ const cardList = new Section(
 );
 cardList.renderItems();
 const createCard = (item) => {
-  const card = new Card(item, cardSettings.cardsTemplate);
+  const card = new Card(item, cardSettings.cardsTemplate, () => {
+    imagePopup.open(item);
+  });
   const cardElement = card.generateCard();
   return cardElement;
 };
-addCardPopupForm.addEventListener("submit", () => {
+const addCardForm = new PopupWithForm("#addImagePopup__form", () => {
   const data = {
     name: addCardPopupCaption.value,
     link: addCardPopupURL.value,
@@ -81,14 +84,17 @@ addCardPopupForm.addEventListener("submit", () => {
   const cardElement = createCard(data);
   cardsSection.prepend(cardElement);
   closePopup(addCardPopup);
-  addCardPopupForm.reset();
 });
 
-//////////////////////////////////////////////////////////////////////////////////
-
 const editProfilePopup = document.querySelector("#profilePopup");
-const profilePopupForm = document.querySelector("#profilePopup__form");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
+
+const profileForm = new PopupWithForm("#profilePopup__form", () => {
+  profileName.textContent = profilePopupName.value;
+  profileDescription.textContent = profilePopupDescription.value;
+  closePopup(editProfilePopup);
+});
+profileForm.setEventListeners();
 
 const profilePopupName = document.querySelector(
   ".popup__input_changeProfileData_name"
@@ -104,13 +110,8 @@ const editProfile = new Popup("#profilePopup");
 const addCard = new Popup("#addImagePopup");
 profileEditButton.addEventListener("click", () => editProfile.open());
 addButton.addEventListener("click", () => addCard.open());
-editProfile.setEventListeners();
-addCard.setEventListeners();
 
-function changeProfileData(event) {
-  event.preventDefault();
-  profileName.textContent = profilePopupName.value;
-  profileDescription.textContent = profilePopupDescription.value;
-  closePopup(editProfilePopup);
-}
-profilePopupForm.addEventListener("submit", changeProfileData);
+profileForm.setEventListeners();
+editProfile.setEventListeners();
+addCardForm.setEventListeners();
+addCard.setEventListeners();

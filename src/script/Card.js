@@ -42,20 +42,15 @@ export class Card {
     this._image = this._card.querySelector(cardSettings.cardImageClass);
   }
   _toggleLike() {
-    this._likeButton.addEventListener("click", () => {
+    this._likeButton.addEventListener("click", (e) => {
+      e.stopPropagation();
       this._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
     });
   }
-  // _zoomCard() {
-  //   this._image.addEventListener("click", () => {
-  //     imagePopupPhoto.src = this._link;
-  //     imagePopupPhoto.alt = this._text;
-  //     imagePopupCaption.textContent = this._text;
-  //     openPopup(imagePopup);
-  //   });
-  // }
+
   _removeCard() {
-    const removeCard = () => {
+    const removeCard = (e) => {
+      e.stopPropagation();
       this._card.remove();
       this._removeButton.removeEventListener("click", removeCard);
     };
