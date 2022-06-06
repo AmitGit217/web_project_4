@@ -1,6 +1,7 @@
 import "./pages/index.css";
 import { Section } from "./script/Section";
 import { Popup } from "./script/Popup";
+import { PopupWithImage } from "./script/PopupWithImage";
 import {
   Card,
   addCardPopupCaption,
@@ -51,11 +52,15 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
+const imagePopup = new PopupWithImage(".popup_image");
+imagePopup.setEventListeners();
 const cardList = new Section(
   {
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item, cardSettings.cardsTemplate);
+      const card = new Card(item, cardSettings.cardsTemplate, () => {
+        imagePopup.open(item);
+      });
       const cardElement = card.generateCard();
       cardList.setItem(cardElement);
     },

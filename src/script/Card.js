@@ -19,14 +19,15 @@ const cardSettings = {
   cardZoomImageClass: ".popup__image",
   cardZoomCaptionClass: ".popup__caption",
 };
-const imagePopup = document.querySelector(cardSettings.cardImagePopup);
-const imagePopupPhoto = document.querySelector(cardSettings.cardZoomImageClass);
-const imagePopupCaption = document.querySelector(
-  cardSettings.cardZoomCaptionClass
-);
+// const imagePopup = document.querySelector(cardSettings.cardImagePopup);
+// const imagePopupPhoto = document.querySelector(cardSettings.cardZoomImageClass);
+// const imagePopupCaption = document.querySelector(
+//   cardSettings.cardZoomCaptionClass
+// );
 
 export class Card {
-  constructor(data, template) {
+  constructor(data, template, handleClick) {
+    this._handleClick = handleClick;
     this._text = data.name;
     this._link = data.link;
     this._template = template;
@@ -45,14 +46,14 @@ export class Card {
       this._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
     });
   }
-  _zoomCard() {
-    this._image.addEventListener("click", () => {
-      imagePopupPhoto.src = this._link;
-      imagePopupPhoto.alt = this._text;
-      imagePopupCaption.textContent = this._text;
-      openPopup(imagePopup);
-    });
-  }
+  // _zoomCard() {
+  //   this._image.addEventListener("click", () => {
+  //     imagePopupPhoto.src = this._link;
+  //     imagePopupPhoto.alt = this._text;
+  //     imagePopupCaption.textContent = this._text;
+  //     openPopup(imagePopup);
+  //   });
+  // }
   _removeCard() {
     const removeCard = () => {
       this._card.remove();
@@ -63,7 +64,10 @@ export class Card {
   _setEventListeners() {
     this._toggleLike();
     this._removeCard();
-    this._zoomCard();
+    this._card.addEventListener("click", () => {
+      this._handleClick();
+    });
+    // this._zoomCard();
   }
   generateCard() {
     this._image.src = this._link;
