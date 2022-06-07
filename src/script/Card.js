@@ -1,34 +1,11 @@
-const popupSettings = {
-  inputCaption: ".popup__input_addPhoto_caption",
-  inputLink: ".popup__input_addPhoto_ImageURL",
-  cardForm: "#addImagePopup__form",
-  addCardPopup: "#addImagePopup",
-};
-
-const cardSettings = {
-  cardsSection: ".elements",
-  cardImagePopup: ".popup_image",
-  cardsTemplate: "#card-template",
-  cardClass: ".card",
-  cardImageClass: ".card__image",
-  cardCaptionClass: ".card__caption",
-  cardRemoveButton: ".card__removeButton",
-  cardLikeButton: ".card__like-button",
-  cardLikeButtonActive: "card__like-button_active",
-  cardZoomImageClass: ".popup__image",
-  cardZoomCaptionClass: ".popup__caption",
-};
+import { cardSettings } from "../utils/consts";
 const {
-  cardImagePopup,
-  cardsTemplate,
   cardClass,
   cardImageClass,
   cardCaptionClass,
   cardRemoveButton,
   cardLikeButton,
   cardLikeButtonActive,
-  cardZoomImageClass,
-  cardZoomCaptionClass,
 } = cardSettings;
 export class Card {
   constructor(data, template, handleClick) {
@@ -74,17 +51,3 @@ export class Card {
     return this._card;
   }
 }
-
-const addCardPopupCaption = document.querySelector(popupSettings.inputCaption);
-const addCardPopupURL = document.querySelector(popupSettings.inputLink);
-const addCardPopupForm = document.querySelector(popupSettings.cardForm);
-const addCardPopup = document.querySelector(popupSettings.addCardPopup);
-const cardsSection = document.querySelector(cardSettings.cardsSection);
-export {
-  addCardPopupCaption,
-  addCardPopupURL,
-  addCardPopupForm,
-  addCardPopup,
-  cardsSection,
-  cardSettings,
-};

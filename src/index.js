@@ -1,20 +1,20 @@
 import "./pages/index.css";
 import { Section } from "./script/Section";
+import { Card } from "./script/Card";
 import { Popup } from "./script/Popup";
 import { PopupWithImage } from "./script/PopupWithImage";
 import { PopupWithForm } from "./script/PopupWithForm";
 import { UserInfo } from "./script/UserInfo";
 import {
-  Card,
   addCardPopupCaption,
   addCardPopupURL,
-  addCardPopupForm,
   addCardPopup,
   cardsSection,
   cardSettings,
-} from "./script/Card.js";
-import { openPopup, closePopup } from "./utils/utils.js";
+} from "./utils/consts";
+import { closePopup } from "./utils/utils.js";
 import { FormValidation, configObject } from "./script/FormValidation.js";
+import { initialCards } from "./utils/consts";
 
 const formValidators = {};
 const enableValidations = (configObject) => {
@@ -28,39 +28,13 @@ const enableValidations = (configObject) => {
 };
 enableValidations(configObject);
 
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
 const imagePopup = new PopupWithImage(".popup_image");
 imagePopup.setEventListeners();
 const cardList = new Section(
   {
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item, cardSettings.cardsTemplate, () => {
+      const card = new Card(item, cardsTemplate, () => {
         imagePopup.open(item);
       });
       const cardElement = card.generateCard();
@@ -69,9 +43,10 @@ const cardList = new Section(
   },
   cardsSection
 );
+const { cardsTemplate } = cardSettings;
 cardList.renderItems();
 const createCard = (item) => {
-  const card = new Card(item, cardSettings.cardsTemplate, () => {
+  const card = new Card(item, cardsTemplate, () => {
     imagePopup.open(item);
   });
   const cardElement = card.generateCard();
