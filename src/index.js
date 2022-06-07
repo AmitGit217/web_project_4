@@ -13,7 +13,7 @@ import {
   cardsSection,
   cardSettings,
 } from "./script/Card.js";
-import { openPopup, closePopup } from "./script/utils.js";
+import { openPopup, closePopup } from "./utils/utils.js";
 import { FormValidation, configObject } from "./script/FormValidation.js";
 
 const formValidators = {};
