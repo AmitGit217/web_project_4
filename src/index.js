@@ -51,6 +51,7 @@ const addCardForm = new PopupWithForm("#addImagePopup__form", () => {
   closePopup(addCardPopup);
   addCardForm.close();
 });
+const imagePopup = new PopupWithImage(".popup_image");
 //End of Card logic
 
 //Form logic
@@ -66,9 +67,6 @@ const enableValidations = (configObject) => {
 };
 enableValidations(configObject);
 //End of Form logic
-
-const imagePopup = new PopupWithImage(".popup_image");
-imagePopup.setEventListeners();
 
 const editProfilePopup = document.querySelector("#profilePopup");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
@@ -90,6 +88,7 @@ addButton.addEventListener("click", () => addCard.open());
 profileEditButton.addEventListener("click", () => editProfile.open());
 
 addCard.setEventListeners();
+imagePopup.setEventListeners();
 profileForm.setEventListeners();
 editProfile.setEventListeners();
 addCardForm.setEventListeners();
