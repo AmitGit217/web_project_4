@@ -70,6 +70,7 @@ enableValidations(configObject);
 
 const editProfilePopup = document.querySelector("#profilePopup");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
+
 //Profile popup & UserInfo implementation
 const profile = new UserInfo({
   name: ".profile__name",
