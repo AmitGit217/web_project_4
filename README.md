@@ -16,6 +16,7 @@ Responsive web application for sharing images in a social way.
 - HTML5
 - CSS3
 - VanillaJS
+- Webpack
 
 **Implementations**
 
