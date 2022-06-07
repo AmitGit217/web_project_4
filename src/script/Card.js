@@ -19,11 +19,6 @@ const cardSettings = {
   cardZoomImageClass: ".popup__image",
   cardZoomCaptionClass: ".popup__caption",
 };
-// const imagePopup = document.querySelector(cardSettings.cardImagePopup);
-// const imagePopupPhoto = document.querySelector(cardSettings.cardZoomImageClass);
-// const imagePopupCaption = document.querySelector(
-//   cardSettings.cardZoomCaptionClass
-// );
 
 export class Card {
   constructor(data, template, handleClick) {
@@ -62,7 +57,6 @@ export class Card {
     this._card.addEventListener("click", () => {
       this._handleClick();
     });
-    // this._zoomCard();
   }
   generateCard() {
     this._image.src = this._link;

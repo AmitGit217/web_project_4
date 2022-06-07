@@ -3,6 +3,7 @@ import { Section } from "./script/Section";
 import { Popup } from "./script/Popup";
 import { PopupWithImage } from "./script/PopupWithImage";
 import { PopupWithForm } from "./script/PopupWithForm";
+import { UserInfo } from "./script/UserInfo";
 import {
   Card,
   addCardPopupCaption,
@@ -84,28 +85,29 @@ const addCardForm = new PopupWithForm("#addImagePopup__form", () => {
   const cardElement = createCard(data);
   cardsSection.prepend(cardElement);
   closePopup(addCardPopup);
+  addCardForm.close();
 });
 
 const editProfilePopup = document.querySelector("#profilePopup");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
+const profile = new UserInfo({
+  name: ".profile__name",
+  job: ".profile__description",
+});
+
+const profileInputs = {
+  name: ".popup__input_type_name",
+  job: ".popup__input_type_description",
+};
 
 const profileForm = new PopupWithForm("#profilePopup__form", () => {
-  profileName.textContent = profilePopupName.value;
-  profileDescription.textContent = profilePopupDescription.value;
+  profile.setUserInfo(profileInputs);
   closePopup(editProfilePopup);
 });
 profileForm.setEventListeners();
+profile.getUserInfo();
 
-const profilePopupName = document.querySelector(
-  ".popup__input_changeProfileData_name"
-);
-const profilePopupDescription = document.querySelector(
-  ".popup__input_changeProfileData_description"
-);
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
 const addButton = document.querySelector(".profile__add-button");
-
 const editProfile = new Popup("#profilePopup");
 const addCard = new Popup("#addImagePopup");
 profileEditButton.addEventListener("click", () => editProfile.open());
