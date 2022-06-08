@@ -8,21 +8,22 @@ export class PopupWithForm extends Popup {
   }
   close() {
     super.close();
-    this._form.reset();
+    this._form.id === "addImagePopup__form" ? this._form.reset() : false;
   }
   _getInputValues() {
     const inputData = {};
     this._inputs.forEach((input) => {
       inputData[input.name] = input.value;
     });
+
     return inputData;
   }
 
   setEventListeners() {
+    super.setEventListeners();
     this._popup.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleSubmit();
-      this._getInputValues();
+      this._handleSubmit(this._getInputValues());
     });
   }
 }

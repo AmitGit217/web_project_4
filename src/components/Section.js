@@ -13,4 +13,7 @@ export class Section {
   setItem(element) {
     this._container.append(element);
   }
+  prependItem(element) {
+    this._container.prepend(element);
+  }
 }

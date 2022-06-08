@@ -13,27 +13,12 @@ import {
   cardSettings,
   profileInputs,
 } from "../utils/constants";
-import { closePopup } from "../utils/utils.js";
 import { FormValidation, configObject } from "../components/FormValidation.js";
 import { initialCards } from "../utils/constants";
 
 //Card creation logic
 const { cardsTemplate } = cardSettings;
 const addButton = document.querySelector(".profile__add-button");
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, cardsTemplate, () => {
-        imagePopup.open(item);
-      });
-      const cardElement = card.generateCard();
-      cardList.setItem(cardElement);
-    },
-  },
-  cardsSection
-);
-cardList.renderItems();
 const createCard = (item) => {
   const card = new Card(item, cardsTemplate, () => {
     imagePopup.open(item);
@@ -41,14 +26,21 @@ const createCard = (item) => {
   const cardElement = card.generateCard();
   return cardElement;
 };
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = createCard(item);
+      cardList.setItem(card);
+    },
+  },
+  cardsSection
+);
+cardList.renderItems();
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
-  const data = {
-    name: addCardPopupCaption.value,
-    link: addCardPopupURL.value,
-  };
-  const cardElement = createCard(data);
-  cardsSection.prepend(cardElement);
-  closePopup(addCardPopup);
+  const { caption, image } = addCardForm._getInputValues();
+  const cardElement = createCard({ name: caption, link: image });
+  cardList.prependItem(cardElement);
   addCardForm.close();
 });
 const imagePopup = new PopupWithImage(".popup_image");
@@ -68,7 +60,7 @@ const enableValidations = (configObject) => {
 enableValidations(configObject);
 //End of Form logic
 
-const editProfilePopup = document.querySelector("#profilePopup");
+// const editProfilePopup = document.querySelector("#profilePopup");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
 
 //Profile popup & UserInfo implementation
@@ -76,20 +68,17 @@ const profile = new UserInfo({
   name: ".profile__name",
   job: ".profile__description",
 });
-const profileForm = new PopupWithForm("#profilePopup__form", () => {
-  profile.setUserInfo(profileInputs);
-  closePopup(editProfilePopup);
+const profileForm = new PopupWithForm("#profilePopup", () => {
+  const { fullName, description } = profileForm._getInputValues();
+  profile.setUerInfo({ name: fullName, job: description });
+  profileForm.close();
 });
 profileForm.setEventListeners();
 profile.getUserInfo();
 
-const addCard = new Popup("#addImagePopup");
-const editProfile = new Popup("#profilePopup");
-addButton.addEventListener("click", () => addCard.open());
-profileEditButton.addEventListener("click", () => editProfile.open());
+addButton.addEventListener("click", () => addCardForm.open());
+profileEditButton.addEventListener("click", () => profileForm.open());
 
-addCard.setEventListeners();
 imagePopup.setEventListeners();
 profileForm.setEventListeners();
-editProfile.setEventListeners();
 addCardForm.setEventListeners();
