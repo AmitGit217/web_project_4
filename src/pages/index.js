@@ -1,10 +1,10 @@
-import "./pages/index.css";
-import { Section } from "./components/Section";
-import { Card } from "./components/Card";
-import { Popup } from "./components/Popup";
-import { PopupWithImage } from "./components/PopupWithImage";
-import { PopupWithForm } from "./components/PopupWithForm";
-import { UserInfo } from "./components/UserInfo";
+import "./index.css";
+import { Section } from "../components/Section";
+import { Card } from "../components/Card";
+import { Popup } from "../components/Popup";
+import { PopupWithImage } from "../components/PopupWithImage";
+import { PopupWithForm } from "../components/PopupWithForm";
+import { UserInfo } from "../components/UserInfo";
 import {
   addCardPopupCaption,
   addCardPopupURL,
@@ -12,10 +12,10 @@ import {
   cardsSection,
   cardSettings,
   profileInputs,
-} from "./utils/constants";
-import { closePopup } from "./utils/utils.js";
-import { FormValidation, configObject } from "./components/FormValidation.js";
-import { initialCards } from "./utils/constants";
+} from "../utils/constants";
+import { closePopup } from "../utils/utils.js";
+import { FormValidation, configObject } from "../components/FormValidation.js";
+import { initialCards } from "../utils/constants";
 
 //Card creation logic
 const { cardsTemplate } = cardSettings;
@@ -41,7 +41,7 @@ const createCard = (item) => {
   const cardElement = card.generateCard();
   return cardElement;
 };
-const addCardForm = new PopupWithForm("#addImagePopup__form", () => {
+const addCardForm = new PopupWithForm("#addImagePopup", () => {
   const data = {
     name: addCardPopupCaption.value,
     link: addCardPopupURL.value,
