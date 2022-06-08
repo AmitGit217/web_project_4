@@ -1,20 +1,12 @@
 import "./index.css";
-import { Section } from "../components/Section";
 import { Card } from "../components/Card";
-import { Popup } from "../components/Popup";
-import { PopupWithImage } from "../components/PopupWithImage";
-import { PopupWithForm } from "../components/PopupWithForm";
+import { Section } from "../components/Section";
 import { UserInfo } from "../components/UserInfo";
-import {
-  addCardPopupCaption,
-  addCardPopupURL,
-  addCardPopup,
-  cardsSection,
-  cardSettings,
-  profileInputs,
-} from "../utils/constants";
-import { FormValidation, configObject } from "../components/FormValidation.js";
 import { initialCards } from "../utils/constants";
+import { PopupWithForm } from "../components/PopupWithForm";
+import { PopupWithImage } from "../components/PopupWithImage";
+import { cardsSection, cardSettings } from "../utils/constants";
+import { FormValidation, configObject } from "../components/FormValidation.js";
 
 //Card creation logic
 const { cardsTemplate } = cardSettings;
@@ -73,7 +65,6 @@ const profileForm = new PopupWithForm("#profilePopup", () => {
   profile.setUerInfo({ name: fullName, job: description });
   profileForm.close();
 });
-profileForm.setEventListeners();
 profile.getUserInfo();
 
 addButton.addEventListener("click", () => addCardForm.open());
