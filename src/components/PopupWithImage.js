@@ -2,13 +2,13 @@ import { Popup } from "./Popup";
 export class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
+    this._popupImage = document.querySelector(".popup__image");
+    this._popupCaption = document.querySelector(".popup__caption");
   }
   open({ name, link }) {
-    const popupImage = document.querySelector(".popup__image");
-    const popupCaption = document.querySelector(".popup__caption");
-    popupImage.src = link;
-    popupImage.alt = name;
-    popupCaption.textContent = name;
+    this._popupImage.src = link;
+    this._popupImage.alt = name;
+    this._popupCaption.textContent = name;
     super.open();
   }
 }
