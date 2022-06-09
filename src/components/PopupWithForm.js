@@ -8,21 +8,25 @@ export class PopupWithForm extends Popup {
   }
   close() {
     super.close();
-    this._form.id === "addImagePopup__form" ? this._form.reset() : false;
+    this._form.reset();
   }
-  _getInputValues() {
+  getInputValues() {
     const inputData = {};
     this._inputs.forEach((input) => {
       inputData[input.name] = input.value;
     });
     return inputData;
   }
-
+  setInputValues(data) {
+    this._inputs.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
   setEventListeners() {
     super.setEventListeners();
     this._popup.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleSubmit(this._getInputValues());
+      this._handleSubmit(this.getInputValues());
     });
   }
 }

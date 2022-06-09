@@ -30,7 +30,7 @@ const cardList = new Section(
 );
 cardList.renderItems();
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
-  const { caption, image } = addCardForm._getInputValues();
+  const { caption, image } = addCardForm.getInputValues();
   const cardElement = createCard({ name: caption, link: image });
   cardList.prependItem(cardElement);
   addCardForm.close();
@@ -61,14 +61,17 @@ const profile = new UserInfo({
   job: ".profile__description",
 });
 const profileForm = new PopupWithForm("#profilePopup", () => {
-  const { fullName, description } = profileForm._getInputValues();
+  const { fullName, description } = profileForm.getInputValues();
   profile.setUerInfo({ name: fullName, job: description });
   profileForm.close();
 });
-profile.getUserInfo();
 
 addButton.addEventListener("click", () => addCardForm.open());
-profileEditButton.addEventListener("click", () => profileForm.open());
+profileEditButton.addEventListener("click", () => {
+  const { name, job } = profile.getUserInfo();
+  profileForm.setInputValues({ fullName: name, description: job });
+  profileForm.open();
+});
 
 imagePopup.setEventListeners();
 profileForm.setEventListeners();
