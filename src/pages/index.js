@@ -1,4 +1,5 @@
 import "./index.css";
+import API from "../components/API";
 import { Card } from "../components/Card";
 import { Section } from "../components/Section";
 import { UserInfo } from "../components/UserInfo";
@@ -7,6 +8,15 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
+
+//Connect to to the Practicum's API
+const api = new API({
+  URL: "https://around.nomoreparties.co/v1/cohort-3-en",
+  headers: {
+    authorization: " 4f091419-1c89-4f29-928b-74f786fd1208",
+    "Content-Type": "application/json",
+  },
+});
 
 //Card creation logic
 const { cardsTemplate } = cardSettings;
@@ -56,9 +66,19 @@ enableValidations(configObject);
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
 
 //Profile popup & UserInfo implementation
+api
+  .getUserInfo()
+  .then((res) => {
+    profile.setUserInfo({ name: res.name, job: res.about, avatar: res.avatar });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const profile = new UserInfo({
   name: ".profile__name",
   job: ".profile__description",
+  avatar: ".profile__avatar-image",
 });
 const profileForm = new PopupWithForm("#profilePopup", () => {
   const { fullName, description } = profileForm.getInputValues();
