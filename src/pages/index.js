@@ -1,5 +1,5 @@
 import "./index.css";
-import API from "../components/API";
+import { API } from "../components/API";
 import { Card } from "../components/Card";
 import { Section } from "../components/Section";
 import { UserInfo } from "../components/UserInfo";
@@ -28,20 +28,27 @@ const createCard = (item) => {
   const cardElement = card.generateCard();
   return cardElement;
 };
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const card = createCard(item);
-      cardList.setItem(card);
+api.getInitialCards().then((res) => {
+  const cardList = new Section(
+    {
+      data: res,
+      renderer: (item) => {
+        const card = createCard(item);
+        cardList.setItem(card);
+      },
     },
-  },
-  cardsSection
-);
-cardList.renderItems();
+    cardsSection
+  );
+  cardList.renderItems();
+});
+
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
   const { caption, image } = addCardForm.getInputValues();
   const cardElement = createCard({ name: caption, link: image });
+  api
+    .addCard({ name: caption, link: image })
+    .then((res) => res)
+    .catch((err) => console.log(err));
   cardList.prependItem(cardElement);
   addCardForm.close();
 });
@@ -81,8 +88,16 @@ const profile = new UserInfo({
   avatar: ".profile__avatar-image",
 });
 const profileForm = new PopupWithForm("#profilePopup", () => {
+  const currentImage = document.querySelector(".profile__avatar-image").src;
   const { fullName, description } = profileForm.getInputValues();
-  profile.setUerInfo({ name: fullName, job: description });
+  api.editProfileServer({ name: fullName, about: description }).then((res) => {
+    profile.setUserInfo({
+      name: fullName,
+      job: description,
+      avatar: currentImage,
+    });
+    console.log(res);
+  });
   profileForm.close();
 });
 

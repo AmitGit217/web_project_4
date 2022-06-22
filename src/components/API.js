@@ -1,28 +1,44 @@
-export default class API {
+export class API {
   constructor({ URL, headers }) {
     this.url = URL;
     this.headers = headers;
   }
   getUserInfo() {
-    return fetch("https://around.nomoreparties.co/v1/cohort-3-en/users/me", {
+    return fetch(`${this.url}/users/me`, {
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
   getInitialCards() {
-    return fetch("https://around.nomoreparties.co/v1/cohort-3-en/cards", {
+    return fetch(`${this.url}/cards`, {
       headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
+  }
+  addCard({ name, link }) {
+    return fetch(`${this.url}/cards`, {
+      headers: this.headers,
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
+  }
+  editProfileServer({ name, about }) {
+    return fetch(`${this.url}/users/me`, {
+      headers: this.headers,
+      method: "PATCH",
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 }
