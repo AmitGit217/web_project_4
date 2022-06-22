@@ -23,6 +23,15 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.card__like {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+.card__like-counter {
+  margin: 2px 0 0 6px;
+}
 .card__like-button {
   background: none;
   height: 19px;

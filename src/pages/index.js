@@ -3,7 +3,6 @@ import { API } from "../components/API";
 import { Card } from "../components/Card";
 import { Section } from "../components/Section";
 import { UserInfo } from "../components/UserInfo";
-import { initialCards } from "../utils/constants";
 import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
@@ -49,7 +48,7 @@ const addCardForm = new PopupWithForm("#addImagePopup", () => {
     .addCard({ name: caption, link: image })
     .then((res) => res)
     .catch((err) => console.log(err));
-  cardList.prependItem(cardElement);
+  cardsSection.prepend(cardElement);
   addCardForm.close();
 });
 const imagePopup = new PopupWithImage(".popup_image");
@@ -96,7 +95,7 @@ const profileForm = new PopupWithForm("#profilePopup", () => {
       job: description,
       avatar: currentImage,
     });
-    console.log(res);
+    return res;
   });
   profileForm.close();
 });

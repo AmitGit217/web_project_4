@@ -6,12 +6,14 @@ const {
   cardRemoveButton,
   cardLikeButton,
   cardLikeButtonActive,
+  cardCounter,
 } = cardSettings;
 export class Card {
   constructor(data, template, handleClick) {
     this._handleClick = handleClick;
     this._text = data.name;
     this._link = data.link;
+    this._likesData = data.likes;
     this._template = template;
     this._card = document
       .querySelector(this._template)
@@ -20,6 +22,7 @@ export class Card {
     this._likeButton = this._card.querySelector(cardLikeButton);
     this._removeButton = this._card.querySelector(cardRemoveButton);
     this._image = this._card.querySelector(cardImageClass);
+    this._cardCounter = this._card.querySelector(cardCounter);
   }
   _toggleLike() {
     this._likeButton.addEventListener("click", (e) => {
@@ -46,6 +49,7 @@ export class Card {
   generateCard() {
     this._image.src = this._link;
     this._image.alt = this._text;
+    this._cardCounter.textContent = this._likesData.length;
     this._card.querySelector(cardCaptionClass).textContent = this._text;
     this._setEventListeners();
     return this._card;
