@@ -7,6 +7,7 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
+import { Popup } from "../components/Popup";
 
 //Connect to to the Practicum's API
 const api = new API({
@@ -68,8 +69,9 @@ const enableValidations = (configObject) => {
 enableValidations(configObject);
 //End of Form logic
 
-// const editProfilePopup = document.querySelector("#profilePopup");
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
+const deletePopup = new Popup(".popup_confirm");
+deletePopup.setEventListeners();
 
 //Profile popup & UserInfo implementation
 api
