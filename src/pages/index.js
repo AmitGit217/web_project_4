@@ -30,10 +30,13 @@ const createCard = (item) => {
     () => {
       imagePopup.open(item);
     },
-    () => {
+    (id) => {
       deletePopup.open();
-      deletePopup.setAction(() => {
-        card._removeCard();
+      api.deleteCard(id).then((res) => {
+        deletePopup.setAction(() => {
+          card._removeCard();
+          return res;
+        });
       });
     }
   );

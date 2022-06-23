@@ -41,7 +41,7 @@ export class Card {
     this._toggleLike();
     this._removeButton.addEventListener("click", (e) => {
       e.stopPropagation();
-      this._deleteHandler();
+      this._deleteHandler(this._id);
     });
     this._card.addEventListener("click", () => {
       this._handleClick();
