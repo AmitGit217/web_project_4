@@ -17,14 +17,28 @@ const api = new API({
     "Content-Type": "application/json",
   },
 });
-
+const confirmDelete = document.querySelector(".popup_confirm");
+const deletePopup = new Popup(".popup_confirm");
+deletePopup.setEventListeners();
 //Card creation logic
 const { cardsTemplate } = cardSettings;
 const addButton = document.querySelector(".profile__add-button");
 const createCard = (item) => {
-  const card = new Card(item, cardsTemplate, () => {
-    imagePopup.open(item);
-  });
+  const card = new Card(
+    item,
+    cardsTemplate,
+    () => {
+      imagePopup.open(item);
+    },
+    () => {
+      deletePopup.open();
+      confirmDelete.addEventListener("submit", (e) => {
+        e.preventDefault();
+        card._removeCard();
+        deletePopup.close();
+      });
+    }
+  );
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -70,8 +84,6 @@ enableValidations(configObject);
 //End of Form logic
 
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
-const deletePopup = new Popup(".popup_confirm");
-deletePopup.setEventListeners();
 
 //Profile popup & UserInfo implementation
 api

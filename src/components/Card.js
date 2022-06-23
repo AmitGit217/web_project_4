@@ -9,7 +9,7 @@ const {
   cardCounter,
 } = cardSettings;
 export class Card {
-  constructor(data, template, handleClick) {
+  constructor(data, template, handleClick, handleDelete) {
     this._handleClick = handleClick;
     this._text = data.name;
     this._link = data.link;
@@ -23,6 +23,7 @@ export class Card {
     this._removeButton = this._card.querySelector(cardRemoveButton);
     this._image = this._card.querySelector(cardImageClass);
     this._cardCounter = this._card.querySelector(cardCounter);
+    this._deleteHandler = handleDelete;
   }
   _toggleLike() {
     this._likeButton.addEventListener("click", (e) => {
@@ -32,16 +33,19 @@ export class Card {
   }
 
   _removeCard() {
+    this._card.remove();
+  }
+  _removeCardHandler() {
     const removeCard = (e) => {
       e.stopPropagation();
-      this._card.remove();
+      this._deleteHandler();
       this._removeButton.removeEventListener("click", removeCard);
     };
     this._removeButton.addEventListener("click", removeCard);
   }
   _setEventListeners() {
     this._toggleLike();
-    this._removeCard();
+    this._removeCardHandler();
     this._card.addEventListener("click", () => {
       this._handleClick();
     });
