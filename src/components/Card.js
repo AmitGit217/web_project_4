@@ -9,7 +9,8 @@ const {
   cardCounter,
 } = cardSettings;
 export class Card {
-  constructor(data, template, handleClick, handleDelete) {
+  constructor(data, template, handleClick, handleDelete, userId) {
+    this.data = data;
     this._handleClick = handleClick;
     this._text = data.name;
     this._link = data.link;
@@ -24,8 +25,9 @@ export class Card {
     this._image = this._card.querySelector(cardImageClass);
     this._cardCounter = this._card.querySelector(cardCounter);
     this._deleteHandler = handleDelete;
-    this._ownerId = data.owner;
-    this._id = data._id;
+    this._cardId = data._id;
+    this._ownerId = data.owner._id;
+    this._userId = userId;
   }
   _toggleLike() {
     this._likeButton.addEventListener("click", (e) => {
@@ -41,7 +43,7 @@ export class Card {
     this._toggleLike();
     this._removeButton.addEventListener("click", (e) => {
       e.stopPropagation();
-      this._deleteHandler(this._id);
+      this._deleteHandler(this._cardId);
     });
     this._card.addEventListener("click", () => {
       this._handleClick();
@@ -50,9 +52,12 @@ export class Card {
   generateCard() {
     this._image.src = this._link;
     this._image.alt = this._text;
-    // this._cardCounter.textContent = this._likesData.length;
+    this._cardCounter.textContent = this._likesData.length;
     this._card.querySelector(cardCaptionClass).textContent = this._text;
     this._setEventListeners();
+    if (this._userId !== this._ownerId) {
+      this._removeButton.style.display = "none";
+    }
     return this._card;
   }
 }

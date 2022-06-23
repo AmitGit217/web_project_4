@@ -7,7 +7,6 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
-import { Popup } from "../components/Popup";
 import { PopupWithSubmit } from "../components/PopupWithSubmit";
 
 //Connect to to the Practicum's API
@@ -18,6 +17,21 @@ const api = new API({
     "Content-Type": "application/json",
   },
 });
+
+let userId;
+
+Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
+  ([cardData, userData]) => {
+    userId = userData._id;
+    cardList.renderItems(cardData);
+    profile.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+      avatar: userData.avatar,
+    });
+  }
+);
+
 const deletePopup = new PopupWithSubmit(".popup_confirm");
 deletePopup.setEventListeners();
 //Card creation logic
@@ -38,33 +52,30 @@ const createCard = (item) => {
           return res;
         });
       });
-    }
+    },
+    userId
   );
   const cardElement = card.generateCard();
   return cardElement;
 };
-api.getInitialCards().then((res) => {
-  const cardList = new Section(
-    {
-      data: res,
-      renderer: (item) => {
-        const card = createCard(item);
-        cardList.setItem(card);
-      },
+
+const cardList = new Section(
+  {
+    renderer: (data) => {
+      const card = createCard(data);
+      cardList.setItem(card);
     },
-    cardsSection
-  );
-  cardList.renderItems();
-});
+  },
+  cardsSection
+);
 
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
   const { caption, image } = addCardForm.getInputValues();
-  const cardElement = createCard({ name: caption, link: image });
-  api
-    .addCard({ name: caption, link: image })
-    .then((res) => res)
-    .catch((err) => console.log(err));
-  cardsSection.prepend(cardElement);
+  api.addCard({ name: caption, link: image }).then((res) => {
+    const cardElement = createCard(res);
+    cardsSection.prepend(cardElement);
+  });
+
   addCardForm.close();
 });
 const imagePopup = new PopupWithImage(".popup_image");
@@ -88,14 +99,6 @@ enableValidations(configObject);
 const profileEditButton = document.querySelector("#profilePopup__edit-button");
 
 //Profile popup & UserInfo implementation
-api
-  .getUserInfo()
-  .then((res) => {
-    profile.setUserInfo({ name: res.name, job: res.about, avatar: res.avatar });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 const profile = new UserInfo({
   name: ".profile__name",
