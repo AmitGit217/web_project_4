@@ -8,6 +8,7 @@ import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
 import { Popup } from "../components/Popup";
+import { PopupWithSubmit } from "../components/PopupWithSubmit";
 
 //Connect to to the Practicum's API
 const api = new API({
@@ -17,8 +18,7 @@ const api = new API({
     "Content-Type": "application/json",
   },
 });
-const confirmDelete = document.querySelector(".popup_confirm");
-const deletePopup = new Popup(".popup_confirm");
+const deletePopup = new PopupWithSubmit(".popup_confirm");
 deletePopup.setEventListeners();
 //Card creation logic
 const { cardsTemplate } = cardSettings;
@@ -32,10 +32,8 @@ const createCard = (item) => {
     },
     () => {
       deletePopup.open();
-      confirmDelete.addEventListener("submit", (e) => {
-        e.preventDefault();
+      deletePopup.setAction(() => {
         card._removeCard();
-        deletePopup.close();
       });
     }
   );
@@ -67,6 +65,7 @@ const addCardForm = new PopupWithForm("#addImagePopup", () => {
   addCardForm.close();
 });
 const imagePopup = new PopupWithImage(".popup_image");
+
 //End of Card logic
 
 //Form logic

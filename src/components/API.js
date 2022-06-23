@@ -7,14 +7,18 @@ export class API {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
     }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
     );
   }
   getInitialCards() {
     return fetch(`${this.url}/cards`, {
       headers: this.headers,
     }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
     );
   }
   addCard({ name, link }) {
@@ -26,7 +30,9 @@ export class API {
         link,
       }),
     }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
     );
   }
   editProfileServer({ name, about }) {
@@ -38,7 +44,19 @@ export class API {
         about,
       }),
     }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
+    );
+  }
+  deleteCard(id) {
+    return fetch(`${this.url}/cards/${id}`, {
+      headers: this.headers,
+      method: "DELETE",
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
     );
   }
 }

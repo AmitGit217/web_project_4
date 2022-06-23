@@ -24,6 +24,8 @@ export class Card {
     this._image = this._card.querySelector(cardImageClass);
     this._cardCounter = this._card.querySelector(cardCounter);
     this._deleteHandler = handleDelete;
+    this._ownerId = data.owner;
+    this._id = data._id;
   }
   _toggleLike() {
     this._likeButton.addEventListener("click", (e) => {
@@ -35,17 +37,12 @@ export class Card {
   _removeCard() {
     this._card.remove();
   }
-  _removeCardHandler() {
-    const removeCard = (e) => {
-      e.stopPropagation();
-      this._deleteHandler();
-      this._removeButton.removeEventListener("click", removeCard);
-    };
-    this._removeButton.addEventListener("click", removeCard);
-  }
   _setEventListeners() {
     this._toggleLike();
-    this._removeCardHandler();
+    this._removeButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this._deleteHandler();
+    });
     this._card.addEventListener("click", () => {
       this._handleClick();
     });
@@ -53,7 +50,7 @@ export class Card {
   generateCard() {
     this._image.src = this._link;
     this._image.alt = this._text;
-    this._cardCounter.textContent = this._likesData.length;
+    // this._cardCounter.textContent = this._likesData.length;
     this._card.querySelector(cardCaptionClass).textContent = this._text;
     this._setEventListeners();
     return this._card;
