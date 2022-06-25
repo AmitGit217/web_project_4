@@ -53,7 +53,26 @@ const createCard = (item) => {
         });
       });
     },
-    userId
+    userId,
+    {
+      handleLike: (id) => {
+        card._likesData.some((person) => {
+          if (person) {
+            api.dislikeCard(id).then((res) => {
+              card._likeButton.classList.remove(
+                cardSettings.cardLikeButtonActive
+              );
+              return res;
+            });
+          }
+        });
+        api.likeCard(id).then((res) => {
+          card._likeButton.classList.add(cardSettings.cardLikeButtonActive);
+          console.log(res);
+          return res;
+        });
+      },
+    }
   );
   const cardElement = card.generateCard();
   return cardElement;

@@ -59,4 +59,25 @@ export class API {
         : Promise.reject(`Error: ${res.status}`).catch(console.log)
     );
   }
+  likeCard(id) {
+    return fetch(`${this.url}/cards/likes/${id}`, {
+      headers: this.headers,
+      method: "PUT",
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
+    );
+  }
+
+  dislikeCard(id) {
+    return fetch(`${this.url}/cards/likes/${id}`, {
+      headers: this.headers,
+      method: "DELETE",
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
+    );
+  }
 }
