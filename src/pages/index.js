@@ -55,7 +55,20 @@ const createCard = (item) => {
     },
     userId,
     {
-      handleLike: (id) => {},
+      handleLike: (id) => {
+        card._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
+        if (
+          card._likeButton.classList.contains(cardSettings.cardLikeButtonActive)
+        ) {
+          api.likeCard(id).then((res) => {
+            card._cardCounter.textContent = res.likes.length;
+          });
+        } else {
+          api.dislikeCard(id).then((res) => {
+            card._cardCounter.textContent = res.likes.length;
+          });
+        }
+      },
     }
   );
   const cardElement = card.generateCard();
