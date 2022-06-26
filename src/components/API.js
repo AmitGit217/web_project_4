@@ -1,96 +1,65 @@
-export class API {
+import { costumeFetch } from "../utils/utils";
+export class Api {
   constructor({ URL, headers }) {
     this.url = URL;
     this.headers = headers;
   }
   getUserInfo() {
-    return fetch(`${this.url}/users/me`, {
+    return costumeFetch(`${this.url}/users/me`, {
       headers: this.headers,
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
   getInitialCards() {
-    return fetch(`${this.url}/cards`, {
+    return costumeFetch(`${this.url}/cards`, {
       headers: this.headers,
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
   addCard({ name, link }) {
-    return fetch(`${this.url}/cards`, {
+    return costumeFetch(`${this.url}/cards`, {
       headers: this.headers,
       method: "POST",
       body: JSON.stringify({
         name,
         link,
       }),
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
   editProfileServer({ name, about }) {
-    return fetch(`${this.url}/users/me`, {
+    return costumeFetch(`${this.url}/users/me`, {
       headers: this.headers,
       method: "PATCH",
       body: JSON.stringify({
         name,
         about,
       }),
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
   deleteCard(id) {
-    return fetch(`${this.url}/cards/${id}`, {
+    return costumeFetch(`${this.url}/cards/${id}`, {
       headers: this.headers,
       method: "DELETE",
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
   likeCard(id) {
-    return fetch(`${this.url}/cards/likes/${id}`, {
+    return costumeFetch(`${this.url}/cards/likes/${id}`, {
       headers: this.headers,
       method: "PUT",
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
 
   dislikeCard(id) {
-    return fetch(`${this.url}/cards/likes/${id}`, {
+    return costumeFetch(`${this.url}/cards/likes/${id}`, {
       headers: this.headers,
       method: "DELETE",
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
   updateAvatarImage({ avatar }) {
-    return fetch(`${this.url}/users/me/avatar`, {
+    return costumeFetch(`${this.url}/users/me/avatar`, {
       headers: this.headers,
       method: "PATCH",
       body: JSON.stringify({
         avatar,
       }),
-    }).then((res) =>
-      res.ok
-        ? res.json()
-        : Promise.reject(`Error: ${res.status}`).catch(console.log)
-    );
+    });
   }
 }

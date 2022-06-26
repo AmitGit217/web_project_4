@@ -1,5 +1,5 @@
 import "./index.css";
-import { API } from "../components/API";
+import { Api } from "../components/Api";
 import { Card } from "../components/Card";
 import { Section } from "../components/Section";
 import { UserInfo } from "../components/UserInfo";
@@ -17,7 +17,7 @@ function changeSubmitText(bool, submitButton) {
   }
 }
 //Connect to to the Practicum's API
-const api = new API({
+const api = new Api({
   URL: "https://around.nomoreparties.co/v1/cohort-3-en",
   headers: {
     authorization: " 4f091419-1c89-4f29-928b-74f786fd1208",
