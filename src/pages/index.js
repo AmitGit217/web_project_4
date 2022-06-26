@@ -45,13 +45,13 @@ deletePopup.setEventListeners();
 const { cardsTemplate } = cardSettings;
 const addButton = document.querySelector(".profile__add-button");
 const createCard = (item) => {
-  const card = new Card(
-    item,
-    cardsTemplate,
-    () => {
+  const card = new Card({
+    data: item,
+    template: cardsTemplate,
+    handleClick: () => {
       imagePopup.open(item);
     },
-    (id) => {
+    handleDelete: (id) => {
       deletePopup.open();
       api
         .deleteCard(id)
@@ -63,24 +63,22 @@ const createCard = (item) => {
         })
         .catch((err) => console.log(err));
     },
-    userId,
-    {
-      handleLike: (id) => {
-        card._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
-        if (
-          card._likeButton.classList.contains(cardSettings.cardLikeButtonActive)
-        ) {
-          api.likeCard(id).then((res) => {
-            card._cardCounter.textContent = res.likes.length;
-          });
-        } else {
-          api.dislikeCard(id).then((res) => {
-            card._cardCounter.textContent = res.likes.length;
-          });
-        }
-      },
-    }
-  );
+    userId: userId,
+    handleLike: (id) => {
+      card._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
+      if (
+        card._likeButton.classList.contains(cardSettings.cardLikeButtonActive)
+      ) {
+        api.likeCard(id).then((res) => {
+          card._cardCounter.textContent = res.likes.length;
+        });
+      } else {
+        api.dislikeCard(id).then((res) => {
+          card._cardCounter.textContent = res.likes.length;
+        });
+      }
+    },
+  });
   const cardElement = card.generateCard();
   return cardElement;
 };

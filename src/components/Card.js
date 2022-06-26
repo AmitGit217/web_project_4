@@ -9,14 +9,14 @@ const {
   cardCounter,
 } = cardSettings;
 export class Card {
-  constructor(
+  constructor({
     data,
     template,
     handleClick,
     handleDelete,
     userId,
-    { handleLike }
-  ) {
+    handleLike,
+  }) {
     this.data = data;
     this._handleClick = handleClick;
     this._text = data.name;
