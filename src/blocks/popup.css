@@ -31,7 +31,7 @@
   border-radius: 10px;
   margin: 0;
 }
-.popup_confirm-wrapper {
+.popup__confirm-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
