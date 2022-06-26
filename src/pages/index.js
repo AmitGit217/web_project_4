@@ -9,6 +9,13 @@ import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
 import { PopupWithSubmit } from "../components/PopupWithSubmit";
 
+function changeSubmitText(bool, submitButton) {
+  if (bool) {
+    submitButton.textContent = "Saving...";
+  } else {
+    submitButton.textContent = "Save";
+  }
+}
 //Connect to to the Practicum's API
 const api = new API({
   URL: "https://around.nomoreparties.co/v1/cohort-3-en",
@@ -46,12 +53,15 @@ const createCard = (item) => {
     },
     (id) => {
       deletePopup.open();
-      api.deleteCard(id).then((res) => {
-        deletePopup.setAction(() => {
-          card._removeCard();
-          return res;
-        });
-      });
+      api
+        .deleteCard(id)
+        .then((res) => {
+          deletePopup.setAction(() => {
+            card._removeCard();
+            return res;
+          });
+        })
+        .catch((err) => console.log(err));
     },
     userId,
     {
@@ -86,11 +96,17 @@ const cardList = new Section(
 );
 
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
+  debugger;
   const { caption, image } = addCardForm.getInputValues();
-  api.addCard({ name: caption, link: image }).then((res) => {
-    const cardElement = createCard(res);
-    cardsSection.prepend(cardElement);
-  });
+  changeSubmitText(true, addCardForm._submitButton);
+  api
+    .addCard({ name: caption, link: image })
+    .then((res) => {
+      const cardElement = createCard(res);
+      cardsSection.prepend(cardElement);
+    })
+    .catch((err) => console.log(err))
+    .finally(changeSubmitText(false, addCardForm._submitButton));
 
   addCardForm.close();
 });
@@ -122,20 +138,46 @@ const profile = new UserInfo({
   avatar: ".profile__avatar-image",
 });
 const profileForm = new PopupWithForm("#profilePopup", () => {
-  const currentImage = document.querySelector(".profile__avatar-image").src;
+  debugger;
   const { fullName, description } = profileForm.getInputValues();
-  api.editProfileServer({ name: fullName, about: description }).then((res) => {
-    profile.setUserInfo({
-      name: fullName,
-      job: description,
-      avatar: currentImage,
-    });
-    return res;
-  });
+  changeSubmitText(true, profileForm._submitButton);
+  api
+    .editProfileServer({ name: fullName, about: description })
+    .then((res) => {
+      profile.setUserInfo({
+        name: fullName,
+        job: description,
+        avatar: res.avatar,
+      });
+      return res;
+    })
+    .catch((err) => console.log(err))
+    .finally(changeSubmitText(false, profileForm._submitButton));
   profileForm.close();
+});
+const profileImageButton = document.querySelector(".profile__overlay");
+const uploadProfile = new PopupWithForm("#edit-profile-image", () => {
+  const { updateImageUrl } = uploadProfile.getInputValues();
+  changeSubmitText(true, uploadProfile._submitButton);
+  api
+    .updateAvatarImage({ avatar: updateImageUrl })
+    .then((res) => {
+      changeSubmitText(true, uploadProfile._submitButton);
+      profile.setUserInfo({
+        name: res.name,
+        job: res.about,
+        avatar: updateImageUrl,
+      });
+      uploadProfile.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(changeSubmitText(false, uploadProfile._submitButton));
+  uploadProfile.close();
 });
 
 addButton.addEventListener("click", () => addCardForm.open());
+profileImageButton.addEventListener("click", () => uploadProfile.open());
+
 profileEditButton.addEventListener("click", () => {
   const { name, job } = profile.getUserInfo();
   profileForm.setInputValues({ fullName: name, description: job });
@@ -145,3 +187,4 @@ profileEditButton.addEventListener("click", () => {
 imagePopup.setEventListeners();
 profileForm.setEventListeners();
 addCardForm.setEventListeners();
+uploadProfile.setEventListeners();

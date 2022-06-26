@@ -80,4 +80,17 @@ export class API {
         : Promise.reject(`Error: ${res.status}`).catch(console.log)
     );
   }
+  updateAvatarImage({ avatar }) {
+    return fetch(`${this.url}/users/me/avatar`, {
+      headers: this.headers,
+      method: "PATCH",
+      body: JSON.stringify({
+        avatar,
+      }),
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : Promise.reject(`Error: ${res.status}`).catch(console.log)
+    );
+  }
 }
