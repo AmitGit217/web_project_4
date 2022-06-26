@@ -7,15 +7,9 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
+import { changeSubmitText } from "../utils/utils";
 import { PopupWithSubmit } from "../components/PopupWithSubmit";
-
-function changeSubmitText(bool, submitButton) {
-  if (bool) {
-    submitButton.textContent = "Saving...";
-  } else {
-    submitButton.textContent = submitButton.name;
-  }
-}
+let userId;
 //Connect to to the Practicum's API
 const api = new Api({
   URL: "https://around.nomoreparties.co/v1/cohort-3-en",
@@ -24,9 +18,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
-let userId;
-
 Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
   ([cardData, userData]) => {
     userId = userData._id;
@@ -39,8 +30,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
   }
 );
 
-const deletePopup = new PopupWithSubmit(".popup_confirm");
-deletePopup.setEventListeners();
 //Card creation logic
 const { cardsTemplate } = cardSettings;
 const addButton = document.querySelector(".profile__add-button");
@@ -53,15 +42,15 @@ const createCard = (item) => {
     },
     handleDelete: (id) => {
       deletePopup.open();
-      api
-        .deleteCard(id)
-        .then((res) => {
-          deletePopup.setAction(() => {
+      deletePopup.setAction(() => {
+        return api
+          .deleteCard(id)
+          .then((res) => {
             card._removeCard();
             return res;
-          });
-        })
-        .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      });
     },
     userId: userId,
     handleLike: (id) => {
@@ -104,11 +93,10 @@ const addCardForm = new PopupWithForm("#addImagePopup", () => {
     })
     .catch((err) => console.log(err))
     .finally(changeSubmitText(false, addCardForm._submitButton));
-
   addCardForm.close();
 });
 const imagePopup = new PopupWithImage(".popup_image");
-
+const deletePopup = new PopupWithSubmit(".popup_confirm");
 //End of Card logic
 
 //Form logic
@@ -125,10 +113,8 @@ const enableValidations = (configObject) => {
 enableValidations(configObject);
 //End of Form logic
 
-const profileEditButton = document.querySelector("#profilePopup__edit-button");
-
 //Profile popup & UserInfo implementation
-
+const profileEditButton = document.querySelector("#profilePopup__edit-button");
 const profile = new UserInfo({
   name: ".profile__name",
   job: ".profile__description",
@@ -173,7 +159,6 @@ const uploadProfile = new PopupWithForm("#edit-profile-image", () => {
 
 addButton.addEventListener("click", () => addCardForm.open());
 profileImageButton.addEventListener("click", () => uploadProfile.open());
-
 profileEditButton.addEventListener("click", () => {
   const { name, job } = profile.getUserInfo();
   profileForm.setInputValues({ fullName: name, description: job });
@@ -183,4 +168,5 @@ profileEditButton.addEventListener("click", () => {
 imagePopup.setEventListeners();
 profileForm.setEventListeners();
 addCardForm.setEventListeners();
+deletePopup.setEventListeners();
 uploadProfile.setEventListeners();

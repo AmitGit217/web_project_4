@@ -25,3 +25,11 @@ export const costumeFetch = (url, headers) => {
       : Promise.reject(`Error: ${res.status}`).catch(console.log)
   );
 };
+
+export function changeSubmitText(bool, submitButton) {
+  if (bool) {
+    submitButton.textContent = "Saving...";
+  } else {
+    submitButton.textContent = submitButton.name;
+  }
+}
