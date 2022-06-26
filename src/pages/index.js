@@ -138,27 +138,26 @@ const profileForm = new PopupWithForm("#profilePopup", () => {
   profileForm.close();
 });
 const profileImageButton = document.querySelector(".profile__overlay");
-const uploadProfile = new PopupWithForm("#edit-profile-image", () => {
-  const { updateImageUrl } = uploadProfile.getInputValues();
-  changeSubmitText(true, uploadProfile._submitButton);
+const uploadProfileImage = new PopupWithForm("#edit-profile-image", () => {
+  debugger;
+  const { updateImageUrl } = uploadProfileImage.getInputValues();
+  changeSubmitText(true, uploadProfileImage._submitButton);
   api
     .updateAvatarImage({ avatar: updateImageUrl })
     .then((res) => {
-      changeSubmitText(true, uploadProfile._submitButton);
       profile.setUserInfo({
         name: res.name,
         job: res.about,
         avatar: updateImageUrl,
       });
-      uploadProfile.close();
     })
     .catch((err) => console.log(err))
-    .finally(changeSubmitText(false, uploadProfile._submitButton));
-  uploadProfile.close();
+    .finally(changeSubmitText(false, uploadProfileImage._submitButton));
+  uploadProfileImage.close();
 });
 
 addButton.addEventListener("click", () => addCardForm.open());
-profileImageButton.addEventListener("click", () => uploadProfile.open());
+profileImageButton.addEventListener("click", () => uploadProfileImage.open());
 profileEditButton.addEventListener("click", () => {
   const { name, job } = profile.getUserInfo();
   profileForm.setInputValues({ fullName: name, description: job });
@@ -169,4 +168,4 @@ imagePopup.setEventListeners();
 profileForm.setEventListeners();
 addCardForm.setEventListeners();
 deletePopup.setEventListeners();
-uploadProfile.setEventListeners();
+uploadProfileImage.setEventListeners();
