@@ -18,8 +18,8 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
-  ([cardData, userData]) => {
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cardData, userData]) => {
     userId = userData._id;
     cardList.renderItems(cardData);
     profile.setUserInfo({
@@ -27,8 +27,8 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
       job: userData.about,
       avatar: userData.avatar,
     });
-  }
-);
+  })
+  .catch((err) => console.log(err));
 
 //Card creation logic
 const { cardsTemplate } = cardSettings;
@@ -58,13 +58,19 @@ const createCard = (item) => {
       if (
         card._likeButton.classList.contains(cardSettings.cardLikeButtonActive)
       ) {
-        api.likeCard(id).then((res) => {
-          card._cardCounter.textContent = res.likes.length;
-        });
+        api
+          .likeCard(id)
+          .then((res) => {
+            card._cardCounter.textContent = res.likes.length;
+          })
+          .catch((err) => console.log(err));
       } else {
-        api.dislikeCard(id).then((res) => {
-          card._cardCounter.textContent = res.likes.length;
-        });
+        api
+          .dislikeCard(id)
+          .then((res) => {
+            card._cardCounter.textContent = res.likes.length;
+          })
+          .catch((err) => console.log(err));
       }
     },
   });
