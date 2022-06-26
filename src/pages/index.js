@@ -13,7 +13,7 @@ function changeSubmitText(bool, submitButton) {
   if (bool) {
     submitButton.textContent = "Saving...";
   } else {
-    submitButton.textContent = "Save";
+    submitButton.textContent = submitButton.name;
   }
 }
 //Connect to to the Practicum's API
@@ -96,7 +96,6 @@ const cardList = new Section(
 );
 
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
-  debugger;
   const { caption, image } = addCardForm.getInputValues();
   changeSubmitText(true, addCardForm._submitButton);
   api
@@ -138,7 +137,6 @@ const profile = new UserInfo({
   avatar: ".profile__avatar-image",
 });
 const profileForm = new PopupWithForm("#profilePopup", () => {
-  debugger;
   const { fullName, description } = profileForm.getInputValues();
   changeSubmitText(true, profileForm._submitButton);
   api
