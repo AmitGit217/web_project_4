@@ -69,7 +69,6 @@ class FormValidation {
     this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-
     this._formElement.addEventListener("reset", () => {
       this._resetValidation();
     });

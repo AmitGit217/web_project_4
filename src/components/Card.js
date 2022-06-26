@@ -41,17 +41,27 @@ export class Card {
   removeCard() {
     this._card.remove();
   }
+  getId() {
+    return this._cardId;
+  }
+
+  isLiked() {
+    if (this.likeButton.classList.contains(cardSettings.cardLikeButtonActive)) {
+      return true;
+    }
+  }
   updateLikes(parameter) {
     this.cardCounter.textContent = parameter.length;
+    this.likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
   }
   _setEventListeners() {
     this.likeButton.addEventListener("click", (e) => {
       e.stopPropagation();
-      this._likeAction(this._cardId);
+      this._likeAction(this);
     });
     this._removeButton.addEventListener("click", (e) => {
       e.stopPropagation();
-      this._deleteHandler(this._cardId);
+      this._deleteHandler(this);
     });
     this._card.addEventListener("click", () => {
       this._handleClick();

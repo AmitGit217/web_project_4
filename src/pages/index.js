@@ -7,7 +7,6 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
-
 import { PopupWithSubmit } from "../components/PopupWithSubmit";
 let userId;
 //Connect to to the Practicum's API
@@ -40,11 +39,11 @@ const createCard = (item) => {
     handleClick: () => {
       imagePopup.open(item);
     },
-    handleDelete: (id) => {
+    handleDelete: (card) => {
       deletePopup.open();
       deletePopup.setAction(() => {
         return api
-          .deleteCard(id)
+          .deleteCard(card.getId())
           .then((res) => {
             card.removeCard();
             deletePopup.close();
@@ -54,23 +53,19 @@ const createCard = (item) => {
       });
     },
     userId: userId,
-    handleLike: (id) => {
-      if (
-        !card.likeButton.classList.contains(cardSettings.cardLikeButtonActive)
-      ) {
+    handleLike: (card) => {
+      if (!card.isLiked()) {
         api
-          .likeCard(id)
+          .likeCard(card.getId())
           .then((res) => {
             card.updateLikes(res.likes);
-            card.likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
           })
           .catch((err) => console.log(err));
       } else {
         api
-          .dislikeCard(id)
+          .dislikeCard(card.getId())
           .then((res) => {
             card.updateLikes(res.likes);
-            card.likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
           })
           .catch((err) => console.log(err));
       }
