@@ -27,10 +27,10 @@ export class Card {
       .querySelector(this._template)
       .content.querySelector(cardClass)
       .cloneNode(true);
-    this._likeButton = this._card.querySelector(cardLikeButton);
+    this.likeButton = this._card.querySelector(cardLikeButton);
     this._removeButton = this._card.querySelector(cardRemoveButton);
     this._image = this._card.querySelector(cardImageClass);
-    this._cardCounter = this._card.querySelector(cardCounter);
+    this.cardCounter = this._card.querySelector(cardCounter);
     this._deleteHandler = handleDelete;
     this._cardId = data._id;
     this._ownerId = data.owner._id;
@@ -38,11 +38,14 @@ export class Card {
     this._likeAction = handleLike;
   }
 
-  _removeCard() {
+  removeCard() {
     this._card.remove();
   }
+  updateLikes(parameter) {
+    this.cardCounter.textContent = parameter.length;
+  }
   _setEventListeners() {
-    this._likeButton.addEventListener("click", (e) => {
+    this.likeButton.addEventListener("click", (e) => {
       e.stopPropagation();
       this._likeAction(this._cardId);
     });
@@ -57,7 +60,7 @@ export class Card {
   generateCard() {
     this._image.src = this._link;
     this._image.alt = this._text;
-    this._cardCounter.textContent = this._likesData.length;
+    this.cardCounter.textContent = this._likesData.length;
     this._card.querySelector(cardCaptionClass).textContent = this._text;
     this._setEventListeners();
     if (this._userId !== this._ownerId) {
@@ -65,7 +68,7 @@ export class Card {
     }
     this._likesData.some((like) => {
       if (like._id === this._userId) {
-        this._likeButton.classList.add(cardLikeButtonActive);
+        this.likeButton.classList.add(cardLikeButtonActive);
       }
     });
     return this._card;

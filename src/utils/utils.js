@@ -18,18 +18,3 @@ export function closePopup(popup) {
   popup.removeEventListener("mousedown", closeFromOverlay);
   window.removeEventListener("keydown", closeFromEsc);
 }
-export const costumeFetch = (url, headers) => {
-  return fetch(url, headers).then((res) =>
-    res.ok
-      ? res.json()
-      : Promise.reject(`Error: ${res.status}`).catch(console.log)
-  );
-};
-
-export function changeSubmitText(bool, submitButton) {
-  if (bool) {
-    submitButton.textContent = "Saving...";
-  } else {
-    submitButton.textContent = submitButton.name;
-  }
-}

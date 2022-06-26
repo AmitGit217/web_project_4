@@ -7,7 +7,7 @@ import { PopupWithForm } from "../components/PopupWithForm";
 import { PopupWithImage } from "../components/PopupWithImage";
 import { cardsSection, cardSettings } from "../utils/constants";
 import { FormValidation, configObject } from "../components/FormValidation.js";
-import { changeSubmitText } from "../utils/utils";
+
 import { PopupWithSubmit } from "../components/PopupWithSubmit";
 let userId;
 //Connect to to the Practicum's API
@@ -46,7 +46,8 @@ const createCard = (item) => {
         return api
           .deleteCard(id)
           .then((res) => {
-            card._removeCard();
+            card.removeCard();
+            deletePopup.close();
             return res;
           })
           .catch((err) => console.log(err));
@@ -54,21 +55,22 @@ const createCard = (item) => {
     },
     userId: userId,
     handleLike: (id) => {
-      card._likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
       if (
-        card._likeButton.classList.contains(cardSettings.cardLikeButtonActive)
+        !card.likeButton.classList.contains(cardSettings.cardLikeButtonActive)
       ) {
         api
           .likeCard(id)
           .then((res) => {
-            card._cardCounter.textContent = res.likes.length;
+            card.updateLikes(res.likes);
+            card.likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
           })
           .catch((err) => console.log(err));
       } else {
         api
           .dislikeCard(id)
           .then((res) => {
-            card._cardCounter.textContent = res.likes.length;
+            card.updateLikes(res.likes);
+            card.likeButton.classList.toggle(cardSettings.cardLikeButtonActive);
           })
           .catch((err) => console.log(err));
       }
@@ -90,16 +92,16 @@ const cardList = new Section(
 
 const addCardForm = new PopupWithForm("#addImagePopup", () => {
   const { caption, image } = addCardForm.getInputValues();
-  changeSubmitText(true, addCardForm._submitButton);
+  addCardForm.renderLoading(true);
   api
     .addCard({ name: caption, link: image })
     .then((res) => {
       const cardElement = createCard(res);
       cardsSection.prepend(cardElement);
+      addCardForm.close();
     })
     .catch((err) => console.log(err))
-    .finally(changeSubmitText(false, addCardForm._submitButton));
-  addCardForm.close();
+    .finally(() => addCardForm.renderLoading(false));
 });
 const imagePopup = new PopupWithImage(".popup_image");
 const deletePopup = new PopupWithSubmit(".popup_confirm");
@@ -128,7 +130,7 @@ const profile = new UserInfo({
 });
 const profileForm = new PopupWithForm("#profilePopup", () => {
   const { fullName, description } = profileForm.getInputValues();
-  changeSubmitText(true, profileForm._submitButton);
+  profileForm.renderLoading(true);
   api
     .editProfileServer({ name: fullName, about: description })
     .then((res) => {
@@ -137,17 +139,16 @@ const profileForm = new PopupWithForm("#profilePopup", () => {
         job: description,
         avatar: res.avatar,
       });
+      profileForm.close();
       return res;
     })
     .catch((err) => console.log(err))
-    .finally(changeSubmitText(false, profileForm._submitButton));
-  profileForm.close();
+    .finally(() => profileForm.renderLoading(false));
 });
 const profileImageButton = document.querySelector(".profile__overlay");
 const uploadProfileImage = new PopupWithForm("#edit-profile-image", () => {
-  debugger;
   const { updateImageUrl } = uploadProfileImage.getInputValues();
-  changeSubmitText(true, uploadProfileImage._submitButton);
+  uploadProfileImage.renderLoading(true);
   api
     .updateAvatarImage({ avatar: updateImageUrl })
     .then((res) => {
@@ -156,10 +157,10 @@ const uploadProfileImage = new PopupWithForm("#edit-profile-image", () => {
         job: res.about,
         avatar: updateImageUrl,
       });
+      uploadProfileImage.close();
     })
     .catch((err) => console.log(err))
-    .finally(changeSubmitText(false, uploadProfileImage._submitButton));
-  uploadProfileImage.close();
+    .finally(() => uploadProfileImage.renderLoading(false));
 });
 
 addButton.addEventListener("click", () => addCardForm.open());

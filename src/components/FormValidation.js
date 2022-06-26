@@ -68,8 +68,12 @@ class FormValidation {
     this._toggleButtonState();
     this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
+    });
+
+    this._formElement.addEventListener("reset", () => {
       this._resetValidation();
     });
+
     this._setEventListeners();
   }
 }

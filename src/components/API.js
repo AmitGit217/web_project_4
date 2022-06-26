@@ -1,21 +1,25 @@
-import { costumeFetch } from "../utils/utils";
 export class Api {
   constructor({ URL, headers }) {
     this.url = URL;
     this.headers = headers;
   }
+  _customFetch(url, headers) {
+    return fetch(url, headers).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
+  }
   getUserInfo() {
-    return costumeFetch(`${this.url}/users/me`, {
+    return this._customFetch(`${this.url}/users/me`, {
       headers: this.headers,
     });
   }
   getInitialCards() {
-    return costumeFetch(`${this.url}/cards`, {
+    return this._customFetch(`${this.url}/cards`, {
       headers: this.headers,
     });
   }
   addCard({ name, link }) {
-    return costumeFetch(`${this.url}/cards`, {
+    return this._customFetch(`${this.url}/cards`, {
       headers: this.headers,
       method: "POST",
       body: JSON.stringify({
@@ -25,7 +29,7 @@ export class Api {
     });
   }
   editProfileServer({ name, about }) {
-    return costumeFetch(`${this.url}/users/me`, {
+    return this._customFetch(`${this.url}/users/me`, {
       headers: this.headers,
       method: "PATCH",
       body: JSON.stringify({
@@ -35,26 +39,26 @@ export class Api {
     });
   }
   deleteCard(id) {
-    return costumeFetch(`${this.url}/cards/${id}`, {
+    return this._customFetch(`${this.url}/cards/${id}`, {
       headers: this.headers,
       method: "DELETE",
     });
   }
   likeCard(id) {
-    return costumeFetch(`${this.url}/cards/likes/${id}`, {
+    return this._customFetch(`${this.url}/cards/likes/${id}`, {
       headers: this.headers,
       method: "PUT",
     });
   }
 
   dislikeCard(id) {
-    return costumeFetch(`${this.url}/cards/likes/${id}`, {
+    return this._customFetch(`${this.url}/cards/likes/${id}`, {
       headers: this.headers,
       method: "DELETE",
     });
   }
   updateAvatarImage({ avatar }) {
-    return costumeFetch(`${this.url}/users/me/avatar`, {
+    return this._customFetch(`${this.url}/users/me/avatar`, {
       headers: this.headers,
       method: "PATCH",
       body: JSON.stringify({
