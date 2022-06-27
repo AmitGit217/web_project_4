@@ -15,12 +15,14 @@ Responsive web application for sharing images in a social way.
 
 - HTML5
 - CSS3
-- VanillaJS
+- JavaScript
 - Webpack
 
 **Implementations**
 
 - BEM Methodology
+- Asynchronous programming
+- Working with a RESTful API
 - Form validation using JavaScript
 - ES6 Object-Oriented-Programming
 - Module JavaScript file system and architecture
